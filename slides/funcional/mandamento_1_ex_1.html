@@ -1,0 +1,24 @@
+{% extends BASE %}
+
+{% block title %} Imutabilidade e Persistência (1) {% endblock %}
+
+{% block content %}
+p=. <img src="media/img/persistent_1.png" class="scale" alt="Estruturas de dados persistentes" width="450" height="117"/> <br/>
+{% endblock %}
+
+{% block code %}
+<div class="snippet current">
+{% code "clojure" %}
+(def numbers (range 5))
+=> (0 1 2 3 4)
+{% endcode %}
+</div>
+{% endblock %}
+
+{% block handout %}
+Ilustração: Daniel Martins
+{% endblock %}
+
+{% block notes %}
+Todas as estruturas de dados fornecidas por Clojure são __imutáveis__ e __persistentes__.
+{% endblock %}

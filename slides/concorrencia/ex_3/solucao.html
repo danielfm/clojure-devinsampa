@@ -1,0 +1,48 @@
+{% extends BASE %}
+
+{% block title %} Cover art downloader - Solução {% endblock %}
+
+{% block code %}
+<div class="incremental snippet">
+{% code "clojure" %}
+(def some-track
+  {:artist "Massacration", :album "Good Blood Headbangers", ...})
+{% endcode %}
+</div>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+(defn cover-art-agent [track]
+  (let [track-agent (agent track)]
+    (send-off track-agent update-cover-art)))
+{% endcode %}
+</div>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+(defn update-cover-art [track]
+  (assoc track :cover-art (fetch-cover-art track)))
+{% endcode %}
+</div>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+(def track-agents
+  (doall (map cover-art-agent my-playlist)))
+{% endcode %}
+</div>
+{% endblock %}
+
+{% block handout %}
+Aqui, representamos cada item da playlist como um @Map@ que contém o nome da música, o artista, o nome do álbum, entre outras coisas.
+
+A função @cover-art-agent@ cria um Agent para uma determinada música e pede que esse Agent rode a função @update-cover-art@ em paralelo. Esta função, por sua vez, faz o download da capa do disco com @fetch-cover-art@ e atualiza o @Map@ da música com essa informação.
+
+Por último, a função @(cover-art-agent)@ é chamada para cada música da playlist. Como a função @(map)@ retorna uma sequência lazy, tomamos o cuidado de passar o resultado para @(doall)@, forçando a criação dos Agents.
+{% endblock %}
+
+{% block notes %}
+* Música da playlist representada por um @Map@
+* Função @cover-art-agent@ cria um Agent para uma música e pede que a função @update-cover-art@ seja executada em paralelo para ela
+* Um tempo depois, a capa é baixada e o  @Map@ é atualizado com a nova informação
+{% endblock %}

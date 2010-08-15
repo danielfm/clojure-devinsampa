@@ -1,0 +1,33 @@
+{% extends BASE %}
+
+{% block title %} Transferência bancária {% endblock %}
+
+{% block code %}
+{% code "java" %}
+public class Account {
+    private double balance;
+
+    public void withdraw(double amount) {
+        this.balance -= amount;
+    }
+
+    public void deposit(double amount) {
+        this.balance += amount;
+    }
+
+    public void transferTo(Account to, double amount) {
+        this.withdraw(amount);
+        to.deposit(amount);
+    }
+}
+{% endcode %}
+{% endblock %}
+
+{% block handout %}
+Temos aqui um exemplo de classe que representa uma conta bancária com as três operações básicas: saque, depósito e transferência.
+{% endblock %}
+
+{% block notes %}
+* Eis um exemplo de implementação
+* Perceberam algo errado?
+{% endblock %}

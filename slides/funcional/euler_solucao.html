@@ -1,0 +1,48 @@
+{% extends BASE %}
+
+{% block title %} Project Euler #1 - Solução {% endblock %}
+
+{% block code %}
+<div class="incremental snippet">
+{% code "clojure" %}
+(defn divisible? [n coll]
+  (some #(zero? (rem n %)) coll))
+{% endcode %}
+</div>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+(divisible? 8 [3 5])
+=> nil
+{% endcode %}
+</div>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+(divisible? 10 [3 5])
+=> true
+{% endcode %}
+</div>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+(reduce +
+  (filter #(divisible? % [3 5]) (range 1000)))
+=> 233168
+{% endcode %}
+</div>
+{% endblock %}
+
+{% block handout %}
+Primeiro, definimos a função @(divisible?)@, que serve para dizer se @n@ é divisível por qualquer número em @coll@. A sintaxe @#(...)@ serve para definir funções anônimas, e @%@ se refere ao único parâmetro recebido por essa função.
+
+Depois, fazemos alguns testes para ver se a função funciona mesmo e, por último, a usamos para resolver o problema proposto em três passos: 1) criamos a lista com todos os números possíveis; 2) filtramos os números desejados; e 3) calculamos a soma.
+
+Esse simples exemplo mostra tudo: ausência de estado mutável, funções de primeira classe e sequências __lazy__ (com @(range)@ e @(filter)@).
+{% endblock %}
+
+{% block notes %}
+* Decompor o problema em partes menores
+** Solução em três passos
+* Imutabilidade, funções de 1o nível, lazy evaluation
+{% endblock %}

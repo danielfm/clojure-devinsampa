@@ -1,0 +1,19 @@
+{% extends BASE %}
+
+{% block title %} Atoms, Refs, Agents {% endblock %}
+
+{% block subtitle %} Concorrência para todos os gostos. {% endblock %}
+
+{% block handout %}
+
+Em Clojure, essa separação é feita através de uma entidade chamada __Reference__, que nada mais é que uma camada extra de indireção para um valor imutável. A grande vantagem das References é que elas devem ser modificadas de forma controlada.
+
+As References se dividem em quatro tipos, sendo que, à partir de agora, veremos os três mais importantes.
+{% endblock %}
+
+{% block notes %}
+* Clojure separa esses conceitos com __References__
+** Camada de indireção para valores imutáveis
+** Mudar uma Reference é fazê-la apontar para outro valor imutável
+** Mutabilidade sem suas desvantagens
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends BASE %}
+
+{% block title %} Interoperabilidade com Java {% endblock %}
+
+{% block code %}
+<div class="incremental snippet">
+{% code "clojure" %}
+(import '[java.util Calendar])
+=> java.util.Calendar
+{% endcode %}
+</div>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+(def cal (doto (Calendar/getInstance)
+           (.set Calendar/YEAR 1985)
+           (.set Calendar/MONTH Calendar/MAY)
+           (.set Calendar/DAY_OF_MONTH 1)))
+{% endcode %}
+</div>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+(.getTime cal)
+=> #<Date Wed May 01 09:11:42 BRT 1985>
+{% endcode %}
+</div>
+{% endblock %}
+
+{% block handout %}
+Clojure também é conhecida pela forma com que ela interopera com a plataforma hospedeira.
+
+Neste exemplo, como Clojure não fornece um conjunto de funções específicas para trabalhar com datas, usamos as classes @Calendar@ já disponíveis na biblioteca padrão de Java.
+
+Vale lembrar que Clojure permite também fazer coisas mais "avançadas", como fazer coerção de tipos (inclusive primitivos), declarar classes, implementar interfaces, usar anotações, etc. Mas isso fica como exercício. :)
+{% endblock %}
+
+{% block notes %}
+* Interoperabilidade total com Java e seu ecossistema
+* Também suporta tipos primitivos, implementação de classes/interfaces, anotações, etc
+{% endblock %}

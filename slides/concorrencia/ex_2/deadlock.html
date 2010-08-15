@@ -1,0 +1,35 @@
+{% extends BASE %}
+
+{% block title %} Deadlock {% endblock %}
+
+{% block code %}
+<pre>
+<strong>"Thread-2":
+	at Account.deposit(BankingWrong2.java:89)
+	- waiting to lock &lt;0xaca831b8&gt; (a Account)</strong>
+	at Account.transferTo(BankingWrong2.java:104)
+	<strong>- locked &lt;0xaca831d0&gt; (a Account)</strong>
+	at BankingWrong2$2.run(BankingWrong2.java:20)
+	at java.lang.Thread.run(Thread.java:619)
+<strong>"Thread-1":
+	at Account.deposit(BankingWrong2.java:89)
+	- waiting to lock &lt;0xaca831d0&gt; (a Account)</strong>
+	at Account.transferTo(BankingWrong2.java:104)
+	<strong>- locked &lt;0xaca831b8&gt; (a Account)</strong>
+	at BankingWrong2$1.run(BankingWrong2.java:13)
+	at java.lang.Thread.run(Thread.java:619)
+
+<strong>Found 1 deadlock.</strong>
+</pre>
+{% endblock %}
+
+{% block handout %}
+No método sincronizado @transferTo()@ há uma chamada a @withdraw()@, no mesmo objeto, e a @deposit()@, também sincronizado, no objeto recebido via parâmetro.
+
+Portanto, se @transferTo()@ for chamado na conta *A* para a conta *B*, e ao mesmo tempo, @transferTo()@ for chamado na conta *B* para a conta *A*, voilá: temos um deadlock!
+{% endblock %}
+
+{% block notes %}
+* Deadlock!
+** @a.transferTo(b, x)@ e @b.transferTo(a, x)@ rodarem ao mesmo tempo
+{% endblock %}

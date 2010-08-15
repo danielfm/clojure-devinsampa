@@ -1,0 +1,26 @@
+{% extends BASE %}
+
+{% block title %} Gerador de números únicos {% endblock %}
+
+{% block code %}
+{% code "java" %}
+public class NumberGenerator {
+    private long current = 0L;
+
+    public long getNext() {
+        return ++this.current;
+    }
+}
+{% endcode %}
+{% endblock %}
+
+{% block handout %}
+Temos aqui uma classe que gera números sequenciais únicos. Alguém consegue ver algo de errado nesse código?
+
+O método @getNext()@ tem apenas uma linha de código e passa a falsa impressão de ser atômico e threadsafe...
+{% endblock %}
+
+{% block notes %}
+* Método @getNext()@ não sincronizado
+* Mas ele só tem uma linha, que problema isso pode dar?
+{% endblock %}

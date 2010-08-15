@@ -1,0 +1,54 @@
+{% extends BASE %}
+
+{% block title %} Transferência bancária - Solução {% endblock %}
+
+{% block code %}
+<div class="snippet incremental">
+{% code "clojure" %}
+(def my-account   (ref 100))
+(def your-account (ref 100))
+{% endcode %}
+</div>
+
+<div class="snippet incremental">
+{% code "clojure" %}
+(defn withdraw [account-ref amount]
+  (alter account-ref - amount))
+{% endcode %}
+</div>
+
+<div class="snippet incremental">
+{% code "clojure" %}
+(defn deposit [account-ref amount]
+  (alter account-ref + amount))
+{% endcode %}
+</div>
+
+<div class="snippet incremental">
+{% code "clojure" %}
+(dosync
+  (withdraw my-account 10.0)
+  (deposit your-account 10.0))
+{% endcode %}
+</div>
+
+<div class="snippet incremental">
+{% code "clojure" %}
+[@my-account @your-account]
+=> [90.0 110.0]
+{% endcode %}
+</div>
+{% endblock %}
+
+{% block handout %}
+Criamos neste exemplo duas __Refs__, uma para cada conta, e definimos as operações suportadas. Vejam que essas operações usam @(alter)@ para alterar o valor de uma __Ref__, da mesma forma que se usa @(swap!)@ para alterar o valor de um __Atom__. A única diferença é que @(alter)@ deve ser chamada sempre dentro do contexto de um @(dosync)@, que é quem determina o escopo da unidade de trabalho.
+
+Novamente, não foi necessário usar locks; Clojure cuida disso para nós.
+{% endblock %}
+
+{% block notes %}
+* @(alter)@ altera o valor de uma Ref
+* Deve ser sempre chamada dentro de @(dosync)@
+** Define o escopo da unidade de trabalho
+* Sem locks, novamente
+{% endblock %}

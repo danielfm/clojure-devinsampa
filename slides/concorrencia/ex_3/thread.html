@@ -1,0 +1,30 @@
+{% extends BASE %}
+
+{% block title %} HTTP client assíncrono {% endblock %}
+
+{% block code %}
+{% code "java" %}
+for (final PlaylistEntry track : myPlaylist) {
+    new Thread(new Runnable() {
+        public void run() {
+            try {
+                // Pesquisa a capa na internet e faz o download
+                fetchCoverArt(track);
+            }
+            catch (Exception e) {
+                // ...
+            }
+        }
+    }).start();
+}
+{% endcode %}
+{% endblock %}
+
+{% block handout %}
+Imaginem que temos que baixar a capa dos discos de milhares de músicas. Esta seria uma forma eficiente de resolver o problema?
+{% endblock %}
+
+{% block notes %}
+* Criar threads para fazer o trabalho em paralelo
+** É uma boa solução?
+{% endblock %}

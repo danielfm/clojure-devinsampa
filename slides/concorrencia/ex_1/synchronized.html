@@ -1,0 +1,22 @@
+{% extends BASE %}
+
+{% block title %} Sincronizando acesso a recurso mutável {% endblock %}
+
+{% block code %}
+{% code "java" %}
+public class NumberGenerator {
+    private long current = 0L;
+
+    public synchronized long getNext() {
+        return ++this.current;
+    }
+}
+{% endcode %}
+{% endblock %}
+
+{% block handout %}
+Isso evita que várias threads possam rodar o mesmo método no mesmo objeto ao mesmo tempo.
+{% endblock %}
+
+{% block notes %}
+{% endblock %}

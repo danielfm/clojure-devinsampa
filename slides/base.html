@@ -1,0 +1,26 @@
+<h1>
+  {% filter textile %} {% block title %}{% endblock %} {% endfilter %}
+</h1>
+
+<h2>
+  {% filter textile %} {% block subtitle %}{% endblock %} {% endfilter %}
+</h2>
+
+{% filter textile %}
+  {% block content %}{% endblock %}
+{% endfilter %}
+
+{% block code %}{% endblock %}
+
+<div class="handout">
+<hr/>
+{% filter textile %}
+{% block handout %}{% endblock handout %}
+{% endfilter %}
+</div>
+
+<div class="notes">
+{% filter textile %}
+{% block notes %}{% endblock %}
+{% endfilter %}
+</div>

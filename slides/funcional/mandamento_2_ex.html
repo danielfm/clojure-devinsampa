@@ -1,0 +1,43 @@
+{% extends BASE %}
+
+{% block title %} Funções, funções, funções... {% endblock %}
+
+{% block code %}
+<div class="incremental snippet">
+{% code "clojure" %}
+(defn divisible? [n d]
+  (zero? (rem n d)))
+{% endcode %}
+</div>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+(defn is-even? [n]
+  (divisible? n 2))
+{% endcode %}
+</div>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+(filter is-even? (range 10))
+=> (0 2 4 6 8)
+{% endcode %}
+</div>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+(filter (complement is-even?) (range 10))
+=> (1 3 5 7 9)
+{% endcode %}
+</div>
+{% endblock %}
+
+{% block handout %}
+Funções podem receber outras funções como argumento e retornarem outras funções. Por exemplo podemos filtrar os números pares em uma sequência passando a função @(is-even?)@ a @(filter)@. Ainda, podemos criar facilmente uma função inversa a @(is-even?)@ com @(complement)@.
+{% endblock %}
+
+{% block notes %}
+* Função @(is-even?)@ usa @(divisible?)@, nada anormal até aqui
+* Função @(is-even?)@ passada a @(filter)@ para filtrar os números pares
+* Função @(complement)@ retorna nova função com retorno booleano invertido
+{% endblock %}

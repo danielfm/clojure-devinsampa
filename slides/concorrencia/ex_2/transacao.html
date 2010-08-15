@@ -1,0 +1,25 @@
+{% extends BASE %}
+
+{% block title %} Esqueceu da transação? {% endblock %}
+
+{% block subtitle %} Sem problemas. {% endblock %}
+
+{% block code %}
+<br/>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+(withdraw myAccount 10)
+=> java.lang.IllegalStateException: No transaction running (...)
+{% endcode %}
+</div>
+{% endblock %}
+
+{% block handout %}
+E se eu esquecer de colocar os @(alter)@ dentro de um @(dosync)@, meu programa vai falhar silenciosamente? Não! Tentar modificar referências fora de uma transação resulta em exception.
+{% endblock %}
+
+{% block notes %}
+* Usar @(alter)@ fora de @(dosync)@ resulta em exception
+* Sem falhas silenciosas
+{% endblock %}

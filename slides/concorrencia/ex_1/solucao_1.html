@@ -1,0 +1,30 @@
+{% extends BASE %}
+
+{% block title %} Solução - Gerador de números únicos (1) {% endblock %}
+
+{% block content %}
+p=. <img src="media/img/atom_1.png" class="scale" alt="Atoms" width="275" height="176"/> <br/>
+{% endblock %}
+
+{% block code %}
+<div class="left snippet current">
+{% code "clojure" %}
+(def a-number 10)
+(def counter (atom a-number))
+
+@counter ;; (deref counter)
+=> 10
+{% endcode %}
+</div>
+{% endblock %}
+
+{% block handout %}
+Perceba que o Atom funciona como uma camada de indireção para o valor (imutável, vale ressaltar) a ser controlado. Isso é assim também com as outras References que veremos mais adiante.
+
+Ilustração: Daniel Martins
+{% endblock %}
+
+{% block notes %}
+* Reference é uma simples camada de indireção para um valor imutável
+* Leitura do valor com @@@ ou @(deref)@
+{% endblock %}

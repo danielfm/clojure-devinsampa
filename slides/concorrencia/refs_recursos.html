@@ -1,0 +1,16 @@
+{% extends BASE %}
+
+{% block title %} Power Refs {% endblock %}
+
+{% block subtitle %} Validators, Error Handlers, Watchers... {% endblock %}
+
+{% block handout %}
+As References são capazes de muito mais do que o mostrado aqui. Por exemplo, qualquer tipo de Reference pode especificar uma função validadora, e sempre que o seu valor for alterado, essa função servirá para permitir ou negar a alteração com base nas regras que você especificar.
+
+Os Agents também podem especificar uma função a ser chamada sempre que uma ação enviada a eles lance uma exception. Assim, podemos tratar o erro e reiniciar um agent num único passo.
+{% endblock %}
+
+{% block notes %}
+* As References são capazes de muito mais
+** Vimos apenas o básico do básico
+{% endblock %}

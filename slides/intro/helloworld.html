@@ -1,0 +1,50 @@
+{% extends BASE %}
+
+{% block title %} Hello World {% endblock %}
+
+{% block code %}
+<div class="incremental snippet">
+{% code "clojure" %}
+(* (+ 2 4) 2)
+=> 12
+{% endcode %}
+</div>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+(defn avg [coll]
+  (if (empty? coll)
+    0
+    (/ (apply + coll) (count coll))))
+{% endcode %}
+</div>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+(avg [])
+=> 0
+{% endcode %}
+</div>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+(avg [5 4 3 2 1])
+=> 3
+{% endcode %}
+</div>
+{% endblock %}
+
+{% block handout %}
+Sintaxe extremamente simples:
+
+@(metodo arg1 arg2 argN)@
+
+Esse tipo de sintaxe, difundida no Lisp, é conhecida como *s-expression*, notação composta basicamente de listas e símbolos. A notação pré-fixada também elimina a necessidade de regras obscuras de precedência de operadores como as que existem em Java e C.
+
+Abaixo, definimos uma função @(avg)@ que calcula a média da sequência de números fornecida como argumento. O @(if)@ testa o argumento, retornando zero se a sequência for vazia/nula.
+{% endblock %}
+
+{% block notes %}
+* Sintaxe simples, baseada em listas e símbolos (s-expressions)
+* Prefixada, sem regras de precedência
+{% endblock %}

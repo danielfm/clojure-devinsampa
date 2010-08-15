@@ -1,0 +1,35 @@
+{% extends BASE %}
+
+{% block title %} Dados como funções {% endblock %}
+
+{% block code %}
+<div class="incremental snippet">
+{% code "clojure" %}
+(def a-map {:name "Daniel", :age 25})
+{% endcode %}
+</div>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+(:age a-map)
+=> 25
+{% endcode %}
+</div>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+(a-map :name)
+=> "Daniel"
+{% endcode %}
+</div>
+{% endblock %}
+
+{% block handout %}
+Esse recurso é muito usado com maps, que, como podemos ver, podem ser usados como funções que aceitam um argumento correspondente à chave e retornam o valor associado.
+{% endblock %}
+
+{% block notes %}
+* Recurso idiomático muito usado em código Clojure
+* @Map@ aceita chave como argumento e retorna seu valor
+* @Keyword@ aceita o @Map@ como argumento e retorna o valor associado a si
+{% endblock %}

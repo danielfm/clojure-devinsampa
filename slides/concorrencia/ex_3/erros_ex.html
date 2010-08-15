@@ -1,0 +1,52 @@
+{% extends BASE %}
+
+{% block title %} Cover art downloader - Tratamento de erros {% endblock %}
+
+{% block code %}
+<div class="incremental snippet">
+{% code "clojure" %}
+(send-off failed-agent update-cover-art)
+=> java.lang.RuntimeException: Agent is failed, needs restart
+{% endcode %}
+</div>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+(agent-error failed-agent)
+=> #<ConnectException java.net.ConnectException: connection refused>
+{% endcode %}
+</div>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+(restart-agent failed-agent track)
+=> {:artist "Massacration", :album "Good Blood Headbangers" ...}
+{% endcode %}
+</div>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+(send-off failed-agent update-cover-art)
+{% endcode %}
+</div>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+;; Algum tempo depois...
+@failed-agent
+=> {:cover-art #<File...>, :artist "Massacration" ...}
+{% endcode %}
+</div>
+{% endblock %}
+
+{% block handout %}
+Por exemplo, imagine que uma ação enviada ao Agent @failed-agent@ tenha lançado uma exception. Neste caso, enviar novas ações a tal Agent resulta em exception até que o mesmo seja reiniciado com @(restart-agent)@.
+
+Com a função @(agent-error)@ podemos saber qual foi a exception lançada e tomar precauções para que isso não ocorra novamente.
+{% endblock %}
+
+{% block notes %}
+* Agent não aceita outras ações após uma delas resultar em erro
+** A função @(agent-error)@ retorna qual foi a exception lançada
+* Agent volta a aceitar ações após @(restart-agent)@
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends BASE %}
+
+{% block title %} Imutabilidade e Persistência (2) {% endblock %}
+
+{% block content %}
+p=. <img src="media/img/persistent_2.png" class="scale" alt="Estruturas de dados persistentes" width="450" height="117"/> <br/>
+{% endblock %}
+
+{% block code %}
+<div class="snippet">
+{% code "clojure" %}
+(def numbers (range 5))
+=> (0 1 2 3 4)
+{% endcode %}
+</div>
+
+<div class="current snippet">
+{% code "clojure" %}
+(def numbers-2 (rest numbers))
+=> (1 2 3 4)
+{% endcode %}
+</div>
+{% endblock %}
+
+{% block handout %}
+Quando usamos funções como @(rest)@, novas sequências são retornadas, preservando as versões anteriores; logo são __imutáveis__. Além disso, não são feitas cópias completas dos objetos; novos objetos e objetos antigos compartilham estrutura. Por isso dizemos que tais estruturas são também __persistentes__, que nesse caso nada tem a ver com bancos de dados.
+
+Organizar os dados desta forma permite que as garantias de performance sejam em grande parte mantidas.
+
+Ilustração: Daniel Martins
+{% endblock %}
+
+{% block notes %}
+* Valores imutáveis
+** Manipulações em valores retornam novos valores
+** Podem ser compartilhados entre várias threads
+* Valores persistentes
+** Versões novas e antigas compartilham estrutura
+** Garantias de performance mantidas (em grande parte)
+{% endblock %}

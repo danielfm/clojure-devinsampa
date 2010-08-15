@@ -1,0 +1,45 @@
+{% extends BASE %}
+
+{% block title %} Code as data / data as code {% endblock %}
+
+{% block code %}
+<div class="incremental snippet">
+{% code "clojure" %}
+(def expression '(* (+ 2 3) 4))
+=> (* (+ 2 3) 4)
+{% endcode %}
+</div>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+(list? expression)
+=> true
+{% endcode %}
+</div>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+(count expression)
+=> 3
+{% endcode %}
+</div>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+(eval expression)
+=> 20
+{% endcode %}
+</div>
+{% endblock %}
+
+{% block handout %}
+Clojure é uma linguagem __homoicônica__, ou seja, as mesmas estruturas de dados usadas nos programas são usadas para representá-los internamente. Neste exemplo, criamos um @List@ correspondente a uma expressão matemática. Para evitar que a expressão seja executada, prefixamos a mesma com um apóstrofo, fazendo com que a a estrutura de dados correspondente à expressão seja retornada.
+
+Uma estrutura como essa pode ser avaliada com @(eval)@, ou manipulada usando funções simples que operam em sequências. Não são necessárias bibliotecas próprias para transformação de Árvores Sintáticas Abstratas, como acontece em linguagens como Python e Ruby.
+{% endblock %}
+
+{% block notes %}
+* É __homoicônica__, ou seja, o programa e sua representação interna usam as mesmas estruturas de dados
+* Sem necessidade de biblioteca especial para AST
+* Meta-programação no core da linguagem
+{% endblock %}

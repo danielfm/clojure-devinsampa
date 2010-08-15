@@ -1,0 +1,39 @@
+{% extends BASE %}
+
+{% block title %} Estruturas de dados {% endblock %}
+
+{% block code %}
+<table border="0" class="types">
+  <tr class="incremental">
+    <th>Vectors</th>
+    <td>&rarr;</td>
+    <td>{% code "clojure" %} [1 2 3 4]{% endcode %}</td>
+  </tr>
+  <tr class="incremental">
+    <th>Lists</th>
+    <td>&rarr;</td>
+    <td>{% code "clojure" %}'(1 2 3 4){% endcode %}</td>
+  </tr>
+  <tr class="incremental">
+    <th>Sets</th>
+    <td>&rarr;</td>
+    <td>{% code "clojure" %}#{1 2 3 4}{% endcode %}</td>
+  </tr>
+  <tr class="incremental">
+    <th>Maps</th>
+    <td>&rarr;</td>
+    <td>{% code "clojure" %} {:name "Daniel", :age 25}{% endcode %}</td>
+  </tr>
+</table>
+{% endblock %}
+
+{% block handout %}
+Clojure conta com estruturas de dados __imutáveis__ e __persistentes__. Veremos o que isso significa mais adiante.
+{% endblock %}
+
+{% block notes %}
+* @Vector@: Sequência indexada
+* @List@: Sequência principal da linguagem
+* @Set@: Sequência sem duplicatas
+* @Map@: Dicionário de pares chave-valor
+{% endblock %}

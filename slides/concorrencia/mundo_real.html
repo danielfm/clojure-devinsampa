@@ -1,0 +1,18 @@
+{% extends BASE %}
+
+{% block title %} O mundo dá voltas {% endblock %}
+
+{% block subtitle %} Nem tudo é sempre do mesmo.  {% endblock %}
+
+{% block handout %}
+Muito falamos das vantages da programação funcional, com suas funções puras e estruturas de dados imutáveis. Mas e quanto às desvantagens?
+
+A principal delas é que o mundo onde vivemos não é tão previsível quanto uma simples equação matemática; aplicações não triviais tem comportamento perceptível ao longo do tempo, e isso vai de encontro alguns princípios da programação funcional.
+{% endblock %}
+
+{% block notes %}
+* Programação Funcional também tem suas desvantagens
+** Programas não triviais não são caixas-pretas
+** Mudanças ocorrem o tempo todo e influenciam seu funcionamento
+** Inerentemente incompatível com alguns princípios da programação funcional
+{% endblock %}

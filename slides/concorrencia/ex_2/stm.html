@@ -1,0 +1,19 @@
+{% extends BASE %}
+
+{% block title %} Software Transaction Memory {% endblock %}
+
+{% block subtitle %} Atomicidade, Consistência, Isolamento. {% endblock %}
+
+{% block handout %}
+Felizmente, existe algo parecido em Clojure.
+
+A unidade de trabalho a que me referi é implementada por um componente chamado *STM*, ou __Software Transactional Memory__, que é responsável por fornecer semântica transacional semelhante a encontrada em bancos de dados relacionais.
+
+As __Refs__, o segundo tipo de Reference que veremos hoje, são necessárias quando precisamos realizar alterações síncronas e coordenadas com o auxílio da *STM*. Esse tipo de Reference é perfeita para resolvermos esse problema de transferência bancária.
+{% endblock %}
+
+{% block notes %}
+* __Refs__: O segundo tipo de Reference
+** Trazem essa semântica transacional aos nossos programas
+** Alterações síncronas e coordenadas, sem locks
+{% endblock %}

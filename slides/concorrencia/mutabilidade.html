@@ -1,0 +1,15 @@
+{% extends BASE %}
+
+{% block title %} Mutablidade e Concorrência {% endblock %}
+
+{% block subtitle %} Uma mistura pior que Créu e Rebolation. {% endblock %}
+
+{% block handout %}
+Na verdade, a mutabilidade por si só não é o diabo. O problema é quando abusamos dela, principalmente num contexto onde podemos ter várias threads acessando os mesmos objetos.
+{% endblock %}
+
+{% block notes %}
+* Mutabilidade é ruim?
+** É ruim quando não existe controle
+** Misture threads = Dança do Créu
+{% endblock %}

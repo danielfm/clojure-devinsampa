@@ -1,0 +1,22 @@
+{% extends BASE %}
+
+{% block title %} Existe um limite para tudo {% endblock %}
+
+{% block content %}
+p=. <img src="media/img/overload.jpg" class="scale" alt="Sobrecarga" width="547" height="420"/>
+{% endblock %}
+
+{% block handout %}
+Evite fazer algo assim! A ideia é ruim pois podemos acabar criando mais threads que o necessário, sem falar que threads puras não fornecem sistemas confiáveis para tratamento de erros, cancelamento de tarefas, entre outras coisas.
+
+De qualquer modo, os recursos poderiam ser melhor aproveitados se usássemos uma thread pool.
+
+Foto: Phill Cotterill
+{% endblock %}
+
+{% block notes %}
+* Jamais faça isso!
+* Muitas jobs muito longas = sobrecarrega o sistema como um todo
+* Muitas jobs muito curtas = muitas threads desnecessárias
+* Thread pool: melhor utilização dos recursos
+{% endblock %}

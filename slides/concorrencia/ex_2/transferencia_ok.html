@@ -1,0 +1,55 @@
+{% extends BASE %}
+
+{% block title %} Lock ordering {% endblock %}
+
+{% block code %}
+{% code "java" %}
+Object tie = new Object();
+
+public void transfer(Account from, Account to, double amount) throws Exception {
+    Account a1 = from, a2 = to;
+    boolean useTie = true;
+
+    int hashFrom = System.identityHashCode(from);
+    int hashTo   = System.identityHashCode(to);
+
+    if (hashFrom > hashTo) {
+        useTie = false;
+    }
+    if (hashFrom < hashTo) {
+        a1 = to; a2 = from; useTie = false;
+    }
+
+    if (useTie) {
+        synchronized (tie) {
+            synchronized (a1) {
+                synchronized (a2) {
+                    from.withdraw(amount); to.deposit(amount);
+                }
+            }
+        }
+    } else {
+        synchronized (a1) {
+            synchronized (a2) {
+                from.withdraw(amount); to.deposit(amount);
+            }
+        }
+    }
+}
+{% endcode %}
+{% endblock %}
+
+{% block handout %}
+Sincronizar um único recurso, como mostramos no problema anterior, é algo muito simples de ser feito. Aumente o número de recursos para 2 (ou mais) e veja que rapidamente as coisas começam a sair do controle.
+
+Aqui foi preciso usar uma técnica (gambiarra) conhecida como *lock ordering*, que consiste em determinar a ordem na qual os locks são obtidos afim de evitar ciclos que levem a deadlocks.
+
+E o método, que tinha apenas 4 linhas de código, agora tem quase 30. Um pequeno aumento de ~650% LOC!
+{% endblock %}
+
+{% block notes %}
+* Fazer isso funcionar em Java dá trabalho
+** Aumento de ~650% LOC!
+* Solução possível usando __lock ordering__
+** Reservar locks sempre na mesma ordem evita deadlock
+{% endblock %}

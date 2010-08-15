@@ -1,0 +1,34 @@
+{% extends BASE %}
+
+{% block title %} Transferência bancária - nova tentativa {% endblock %}
+
+{% block code %}
+{% code "java" %}
+public class Account {
+    private double balance;
+
+    public synchronized void withdraw(double amount) {
+        this.balance -= amount;
+    }
+
+    public synchronized void deposit(double amount) {
+        this.balance += amount;
+    }
+
+    public synchronized void transferTo(Account to, double amount) {
+        this.withdraw(amount);
+        to.deposit(amount);
+    }
+}
+{% endcode %}
+{% endblock %}
+
+{% block handout %}
+Além disso, para tornar o procedimento de transferência bancária atômico, o método @transferTo()@ também foi sincronizado.
+{% endblock %}
+
+{% block notes %}
+* Pronto, sincronizado!
+** Inclusive o método @transferTo()@, para tornar a operação "atômica"
+* Isso basta, certo?
+{% endblock %}

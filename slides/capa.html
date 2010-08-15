@@ -1,0 +1,29 @@
+{% extends BASE %}
+
+{% block title %} {{ TITLE }} {% endblock %}
+
+{% block content %}
+p=. <img src="media/img/clojure-icon.gif" class="scale" alt="Clojure logo" width="100" height="100"/>
+
+h3. {{ SPEAKER }}
+
+h4. {{ COMPANY }}
+
+"@{{ SPEAKER_TWITTER }}":http://twitter.com/{{ SPEAKER_TWITTER }} &bull; "{{ SPEAKER_EMAIL }}":mailto:{{ SPEAKER_EMAIL }} &bull "{{ COMPANY_WEBSITE }}":http://{{ COMPANY_WEBSITE }}
+{% endblock %}
+
+{% block handout %}
+h2. Proposta
+
+Clojure é uma linguagem de programação funcional para JVM que vem crescendo muito em popularidade, apesar de ter sido criada há apenas dois anos. Esta linguagem, que possui muitas semelhanças com Lisp, dá a devida atenção a uma característica cada vez mais presente - e necessária - nos softwares modernos: concorrência.
+
+Esta palestra dará aos participantes uma breve introdução à linguagem de programação Clojure, passando por aspectos importantes da Programação Funcional e mostrando como tais aspectos ajudam na solução de problemas corriqueiros de concorrência de uma forma simples e elegante.
+
+h2. Palestrante
+
+*Daniel Martins* é graduado em Sistemas de Informação e desenvolve softwares como hobby e profissão desde 2000. Fundador da Destaquenet Soluções, uma empresa voltada à prestação de serviços baseados em software livre, ele possui especialização na plataforma Java e utiliza a tecnologia há vários anos, sendo programador e desenvolvedor web certificado pela Sun Microsystems. Também se interessa por assuntos ligados à cultura open source, metodologias ágeis, engenharia de software, frameworks e linguagens dinâmicas tais como Python, Ruby e, obviamente, Clojure.
+
+URL: "{{ COMPANY_WEBSITE }}":http://{{ COMPANY_WEBSITE }}
+Email: "{{ SPEAKER_EMAIL }}":mailto:{{ SPEAKER_EMAIL }}
+Twitter: "@{{ SPEAKER_TWITTER }}":http://twitter.com/{{ SPEAKER_TWITTER }}
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends BASE %}
+
+{% block title %} Race condition {% endblock %}
+
+{% block code %}
+{% code "java" %}
+public long getNext();
+  Code:
+   Stack=5, Locals=1, Args_size=1
+   0:	aload_0
+   1:	dup
+   2:	getfield	#2; //Field current:J
+   5:	lconst_1
+   6:	ladd
+   7:	dup2_x1
+   8:	putfield	#2; //Field current:J
+   11:	lreturn
+  LineNumberTable: 
+   line X: 0
+{% endcode %}
+{% endblock %}
+
+{% block handout %}
+...mas só parece ser.
+
+Quando a classe é compilada para bytecodes, o conteúdo do método @getNext()@ é decomposto em várias outras instruções; entre uma instrução e outra, o escalonador pode permitir que outra thread rode concorrentemente, fazendo com que o método retorne o mesmo número várias vezes.
+{% endblock %}
+
+{% block notes %}
+* Mesmo instruções simples são compostas de várias instruções de "baixo nível"
+* Em qualquer uma, a thread atual pode parar e dar lugar a outra
+* __Race condition__
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends BASE %}
+
+{% block title %} Locks {% endblock %}
+
+{% block subtitle %} Sempre proteja acesso a estado mutável! {% endblock %}
+
+{% block handout %}
+A solução é sempre usar locks para proteger o acesso a estado mutável.
+{% endblock %}
+
+{% block notes %}
+Uma forma de resolver o problema é sincronizar o método @getNext()@.
+{% endblock %}

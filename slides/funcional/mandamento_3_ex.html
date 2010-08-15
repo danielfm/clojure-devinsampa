@@ -1,0 +1,46 @@
+{% extends BASE %}
+
+{% block title %} Estruturas de dados "lazy" {% endblock %}
+
+{% block code %}
+<div class="incremental snippet">
+{% code "clojure" %}
+(defn echo [n]
+  (println n) n)
+{% endcode %}
+</div>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+(def my-numbers
+  (map echo (range 3)))
+{% endcode %}
+</div>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+(doall my-numbers)
+0
+1
+2
+=> (0 1 2)
+{% endcode %}
+</div>
+
+<div class="incremental snippet">
+{% code "clojure" %}
+(doall my-numbers)
+=> (0 1 2)
+{% endcode %}
+</div>
+{% endblock %}
+
+{% block handout %}
+Em Clojure, diversas funções retornam estruturas de dados __lazy__, isto é, estruturas cujos elementos só serão computados (e cacheados) quando -- e se -- estes forem requisitados.
+{% endblock %}
+
+{% block notes %}
+* Várias funções retornam sequências lazy (ex: @(filter)@)
+* Valores computados uma vez e cacheados
+* @(doall)@ força a avaliação dos elementos de uma sequência
+{% endblock %}

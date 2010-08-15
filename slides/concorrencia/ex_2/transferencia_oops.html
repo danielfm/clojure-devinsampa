@@ -1,0 +1,15 @@
+{% extends BASE %}
+
+{% block title %} Já esqueceu, é? {% endblock %}
+
+{% block subtitle %}
+<cite>&#9834; "Synchroniza-tion-tion..." &#9834;</cite>
+{% endblock %}
+
+{% block handout %}
+Para evitar o problema que vimos no exemplo anterior, lembre-se que devemos sincronizar os métodos que acessam recursos compartilhados.
+{% endblock %}
+
+{% block notes %}
+* Devemos sincronizar os métodos para evitar __race conditions__
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends BASE %}
+
+{% block title %} Agents {% endblock %}
+
+{% block subtitle %} Complexidade na medida certa. {% endblock %}
+
+{% block handout %}
+__Agents__ servem justamente para o caso de precisarmos fazer atualizações assíncronas e independentes. Com um conjunto reduzido de funções, podemos aproveitar os recursos existentes na API @java.util.concurrent.*@ para tal, de uma forma simples; Clojure cuida das partes chatas, como criar e manter thread pools separados para jobs normais e jobs de I/O, entre outras coisas.
+{% endblock %}
+
+{% block notes %}
+* Atualizações assíncronas e indepentes
+* Agents usam a API @java.util.concurrent.*@ por baixo dos panos
+* Gerenciamento automático de thread pool, executors, etc
+* Funções simples para criar Agents, enfileirar ações e tratar erros
+{% endblock %}

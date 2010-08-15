@@ -1,0 +1,19 @@
+{% extends BASE %}
+
+{% block title %} Identidade &ne; Valor &ne; Estado {% endblock %}
+
+{% block subtitle %} __"The ass has nothing to do with the pants."__ {% endblock %}
+
+{% block handout %}
+Conceitos que são misturados em linguagens imperativas são separados em Clojure.
+
+Em linguagens de programação imperativas, referências apontam diretamente para pedaços de memória onde os valores *mutáveis* se encontram. Isso significa que tudo pode ser modificado por qualquer um a qualquer momento. Não podemos sequer saber se o __estado__ atual de um objeto é válido ou se é um valor em transição!
+{% endblock %}
+
+{% block notes %}
+* Clojure separa conceitos que são misturados em outras linguagens
+* Em linguagens imperativas:
+** Referências apontam para endereços de memória
+** Tudo pode mudar um valor, a qualquer momento
+** Como saber se o valor atual é correto ou é um valor em transição?
+{% endblock %}

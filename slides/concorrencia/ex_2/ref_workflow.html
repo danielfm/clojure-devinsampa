@@ -1,0 +1,23 @@
+{% extends BASE %}
+
+{% block title %} Ref - Workflow {% endblock %}
+
+{% block content %}
+p=. <img src="media/img/ref_workflow.png" class="scale" alt="Ref - workflow" width="585" height="500"/>
+{% endblock %}
+
+{% block handout %}
+Cada thread tem sua própria visão do mundo das __Refs__ através de snapshots. Dessa forma, uma thread não consegue ver as alterações feitas por outra até que esta confirme a transação. Além disso, um bloco @(dosync)@ pode ser executado mais de uma vez caso outra thread modifique uma __Ref__.
+
+Em ambientes onde existem muitas threads alterando as mesmas __Refs__ a todo instante, temos uma perda de performance por conta desse loop, o que é aceitável considerando que temos um código extremamente simples (livre de __race conditions__ e __deadlocks__).
+
+Ilustração: Daniel Martins
+{% endblock %}
+
+{% block notes %}
+* Cada thread tem seu snapshot do mundo
+* Mudanças só se tornam públicas após o __commit__
+* @(dosync)@ roda novamente quando detecta updates conflitantes
+** Muitas escritas + poucas Refs = maior contenção = menor performance
+** Custo baixo comparado às vantagens
+{% endblock %}

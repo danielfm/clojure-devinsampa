@@ -1,0 +1,23 @@
+{% extends BASE %}
+
+{% block title %} Obrigado! {% endblock %}
+
+{% block content %}
+<br/>
+
+h3. {{ SPEAKER }}
+
+h4. {{ COMPANY }}
+
+"@{{ SPEAKER_TWITTER }}":http://twitter.com/{{ SPEAKER_TWITTER }} &bull; "{{ SPEAKER_EMAIL }}":mailto:{{ SPEAKER_EMAIL }} &bull "{{ COMPANY_WEBSITE }}":http://{{ COMPANY_WEBSITE }}
+
+p=. <img src="media/img/cc.png" class="scale" alt="Licença Creative Commons" width="88" height="31"/>
+{% endblock %}
+
+{% block handout %}
+É isso aí, espero que tenham gostado! Se tiverem qualquer dúvida, estamos aí.
+{% endblock %}
+
+{% block notes %}
+* Perguntas?
+{% endblock %}
