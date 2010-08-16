@@ -1,0 +1,3158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Programação Funcional e Concorrente para JVM com Clojure</title>
+
+<!-- metadata -->
+<meta name="generator" content="pydozeoff" />
+<meta name="version" content="0.1.3" />
+<meta name="presdate" content="2010-08-14" />
+<meta name="author" content="Daniel Martins" />
+<meta name="company" content="Destaquenet Soluções em Tecnologia" />
+
+<!-- meta extensions -->
+<meta name="subject" content="Programação Funcional e Concorrente para JVM com Clojure" />
+<meta name="creator" content="Daniel Martins" />
+<meta name="contributor" content="" />
+<meta name="publisher" content="" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="robots" content="index, follow" />
+<meta name="revisit-after" content="7 days" />
+
+<!-- meta temporary -->
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+
+<!-- configuration parameters -->
+<meta name="defaultView" content="slideshow" />
+<meta name="controlVis" content="hidden" />
+
+<!-- configuration extensions -->
+<meta name="tranSitions" content="false" />
+<meta name="fadeDuration" content="200" />
+<meta name="incrDuration" content="100" />
+
+<!-- configuration autoplay extension -->
+<meta name="autoMatic" content="false" />
+<meta name="playLoop" content="false" />
+<meta name="playDelay" content="10" />
+
+<!-- configuration audio extension -->
+<meta name="audioSupport" content="false" />
+<meta name="audioVolume" content="100" />
+<meta name="audioError" content="false" />
+
+<!-- configuration audio debug -->
+<meta name="audioDebug" content="false" />
+
+<!-- style sheet links -->
+<link rel="stylesheet" href="theme/slides.css" type="text/css" media="projection" id="slideProj" />
+<link rel="stylesheet" href="theme/outline.css" type="text/css" media="screen" id="outlineStyle" />
+<link rel="stylesheet" href="theme/print.css" type="text/css" media="print" id="slidePrint" />
+<link rel="stylesheet" href="theme/opera.css" type="text/css" media="projection" id="operaFix" />
+
+<!-- embedded styles -->
+<style type="text/css" media="all">
+.imgcon {width: 100%; margin: 0 auto; padding: 0; text-align: center;}
+#anim {width: 33%; height: 320px; position: relative;}
+#anim img {position: absolute; top: 0px; left: 0px;}
+</style>
+
+<style type="text/css">.hll { background-color: #ffffcc }
+.c { color: #408080; font-style: italic } /* Comment */
+.err { border: 1px solid #FF0000 } /* Error */
+.k { color: #008000; font-weight: bold } /* Keyword */
+.o { color: #666666 } /* Operator */
+.cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.cp { color: #BC7A00 } /* Comment.Preproc */
+.c1 { color: #408080; font-style: italic } /* Comment.Single */
+.cs { color: #408080; font-style: italic } /* Comment.Special */
+.gd { color: #A00000 } /* Generic.Deleted */
+.ge { font-style: italic } /* Generic.Emph */
+.gr { color: #FF0000 } /* Generic.Error */
+.gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.gi { color: #00A000 } /* Generic.Inserted */
+.go { color: #808080 } /* Generic.Output */
+.gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.gs { font-weight: bold } /* Generic.Strong */
+.gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.gt { color: #0040D0 } /* Generic.Traceback */
+.kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.kp { color: #008000 } /* Keyword.Pseudo */
+.kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.kt { color: #B00040 } /* Keyword.Type */
+.m { color: #666666 } /* Literal.Number */
+.s { color: #BA2121 } /* Literal.String */
+.na { color: #7D9029 } /* Name.Attribute */
+.nb { color: #008000 } /* Name.Builtin */
+.nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.no { color: #880000 } /* Name.Constant */
+.nd { color: #AA22FF } /* Name.Decorator */
+.ni { color: #999999; font-weight: bold } /* Name.Entity */
+.ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.nf { color: #0000FF } /* Name.Function */
+.nl { color: #A0A000 } /* Name.Label */
+.nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.nt { color: #008000; font-weight: bold } /* Name.Tag */
+.nv { color: #19177C } /* Name.Variable */
+.ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.w { color: #bbbbbb } /* Text.Whitespace */
+.mf { color: #666666 } /* Literal.Number.Float */
+.mh { color: #666666 } /* Literal.Number.Hex */
+.mi { color: #666666 } /* Literal.Number.Integer */
+.mo { color: #666666 } /* Literal.Number.Oct */
+.sb { color: #BA2121 } /* Literal.String.Backtick */
+.sc { color: #BA2121 } /* Literal.String.Char */
+.sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.s2 { color: #BA2121 } /* Literal.String.Double */
+.se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.sh { color: #BA2121 } /* Literal.String.Heredoc */
+.si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.sx { color: #008000 } /* Literal.String.Other */
+.sr { color: #BB6688 } /* Literal.String.Regex */
+.s1 { color: #BA2121 } /* Literal.String.Single */
+.ss { color: #19177C } /* Literal.String.Symbol */
+.bp { color: #008000 } /* Name.Builtin.Pseudo */
+.vc { color: #19177C } /* Name.Variable.Class */
+.vg { color: #19177C } /* Name.Variable.Global */
+.vi { color: #19177C } /* Name.Variable.Instance */
+.il { color: #666666 } /* Literal.Number.Integer.Long */</style>
+
+<!-- S5 JS -->
+<script src="theme/slides.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div class="layout">
+<div id="controls"><!-- DO NOT EDIT --></div>
+<div id="currentSlide"><!-- DO NOT EDIT --></div>
+<div id="header"></div>
+<div id="footer">
+<h1>Programação Funcional e Concorrente para JVM com Clojure</h1>
+<h2>Dev in Sampa 2010</h2>
+</div>
+</div>
+
+<div class="presentation">
+
+<div class="slide simple ">
+    <h1>
+    Programação Funcional e Concorrente para <span class="caps">JVM</span> com Clojure  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+	<p style="text-align:center;"><img src="media/img/clojure-icon.gif" class="scale" alt="Clojure logo" width="100" height="100"/></p>
+
+	<h3>Daniel Martins</h3>
+
+	<h4>Destaquenet Soluções em Tecnologia</h4>
+
+	<p><a href="http://twitter.com/danielfmt">@danielfmt</a> &bull; <a href="mailto:daniel@destaquenet.com">daniel@destaquenet.com</a> &bull <a href="http://destaquenet.com">destaquenet.com</a></p>
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<h2>Proposta</h2>
+
+	<p>Clojure é uma linguagem de programação funcional para <span class="caps">JVM</span> que vem crescendo muito em popularidade, apesar de ter sido criada há apenas dois anos. Esta linguagem, que possui muitas semelhanças com Lisp, dá a devida atenção a uma característica cada vez mais presente &#8211; e necessária &#8211; nos softwares modernos: concorrência.</p>
+
+	<p>Esta palestra dará aos participantes uma breve introdução à linguagem de programação Clojure, passando por aspectos importantes da Programação Funcional e mostrando como tais aspectos ajudam na solução de problemas corriqueiros de concorrência de uma forma simples e elegante.</p>
+
+	<h2>Palestrante</h2>
+
+	<p><strong>Daniel Martins</strong> é graduado em Sistemas de Informação e desenvolve softwares como hobby e profissão desde 2000. Fundador da Destaquenet Soluções, uma empresa voltada à prestação de serviços baseados em software livre, ele possui especialização na plataforma Java e utiliza a tecnologia há vários anos, sendo programador e desenvolvedor web certificado pela Sun Microsystems. Também se interessa por assuntos ligados à cultura open source, metodologias ágeis, engenharia de software, frameworks e linguagens dinâmicas tais como Python, Ruby e, obviamente, Clojure.</p>
+
+	<p>URL: <a href="http://destaquenet.com">destaquenet.com</a><br />Email: <a href="mailto:daniel@destaquenet.com">daniel@destaquenet.com</a><br />Twitter: <a href="http://twitter.com/danielfmt">@danielfmt</a></p>
+
+
+</div>
+
+<div class="notes">
+
+
+
+</div>
+</div>
+
+<div class="slide image ">
+    <h1>
+   
+  O que eu espero conseguir com esta palestra
+ 
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+	<p style="text-align:center;"><img src="media/img/mumusis.jpg" class="scale" width="264" height="420" alt="Mumu da mangueira"/></p>
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>A idéia aqui não é dissecar a linguagem Clojure, até por que o tempo não permite. A idéia é mostrar alguns de seus recursos mais importantes. Assim, quem se interessar, pode pesquisar mais sobre ela.</p>
+
+	<p>Ilustração: Mumu da Mangueira programa em Clojure (Daniel Martins)</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Mostrar algumas áreas onde a linguagem se destaca
+	<ul>
+		<li>Somente um aperitivo para despertar o interesse</li>
+	</ul></li>
+		<li>Dúvidas no final</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide simple ">
+    <h1>
+    Antes de começarmos&#8230;  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Mas, antes de começarmos, eu queria saber umas coisas sobre vocês.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Quem conhece programação funcional?</li>
+		<li>Alguma linguagem específica? Lisp? Haskell?</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide  ">
+    <h1>
+    Agenda  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+	<ul>
+		<li>Breve introdução à Clojure</li>
+		<li>Clojure e Programação Funcional</li>
+		<li>Concorrência: problemas e soluções</li>
+		<li>Q&amp;A</li>
+	</ul>
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Ênfase na parte de concorrência, que é um dos recursos mais interessantes na linguagem.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Isso é o que veremos hoje.</li>
+		<li>Ênfase em concorrência, um dos sweetspots da linguagem</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide code ">
+    <h1>
+    Hello World  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+
+
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="nb">* </span><span class="p">(</span><span class="nb">+ </span><span class="mi">2</span> <span class="mi">4</span><span class="p">)</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nv">=&gt;</span> <span class="mi">12</span>
+</pre></div>
+
+</div>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="k">defn </span><span class="nv">avg</span> <span class="p">[</span><span class="nv">coll</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">empty?</span> <span class="nv">coll</span><span class="p">)</span>
+    <span class="mi">0</span>
+    <span class="p">(</span><span class="nb">/ </span><span class="p">(</span><span class="nb">apply </span><span class="nv">+</span> <span class="nv">coll</span><span class="p">)</span> <span class="p">(</span><span class="nb">count </span><span class="nv">coll</span><span class="p">))))</span>
+</pre></div>
+
+</div>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="nf">avg</span> <span class="p">[])</span>
+<span class="nv">=&gt;</span> <span class="mi">0</span>
+</pre></div>
+
+</div>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="nf">avg</span> <span class="p">[</span><span class="mi">5</span> <span class="mi">4</span> <span class="mi">3</span> <span class="mi">2</span> <span class="mi">1</span><span class="p">])</span>
+<span class="nv">=&gt;</span> <span class="mi">3</span>
+</pre></div>
+
+</div>
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Sintaxe extremamente simples:</p>
+
+	<p><code>(metodo arg1 arg2 argN)</code></p>
+
+	<p>Esse tipo de sintaxe, difundida no Lisp, é conhecida como <strong>s-expression</strong>, notação composta basicamente de listas e símbolos. A notação pré-fixada também elimina a necessidade de regras obscuras de precedência de operadores como as que existem em Java e C.</p>
+
+	<p>Abaixo, definimos uma função <code>(avg)</code> que calcula a média da sequência de números fornecida como argumento. O <code>(if)</code> testa o argumento, retornando zero se a sequência for vazia/nula.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Sintaxe simples, baseada em listas e símbolos (s-expressions)</li>
+		<li>Prefixada, sem regras de precedência</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide simple ">
+    <h1>
+    Tipos de dados  
+</h1>
+
+<h2>
+    Os mesmos de sempre.  
+</h2>
+
+
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Não vale a pena citar os tipos de dados da linguagem porque quase nada muda em comparação com outras linguagens.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Os mesmos tipos de sempre
+	<ul>
+		<li>Booleanos, caracteres, strings, números&#8230;</li>
+	</ul></li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide  ">
+    <h1>
+    Estruturas de dados  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+
+
+
+<table border="0" class="types">
+  <tr class="incremental">
+    <th>Vectors</th>
+    <td>&rarr;</td>
+    <td><div class="highlight"><pre> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</td>
+  </tr>
+  <tr class="incremental">
+    <th>Lists</th>
+    <td>&rarr;</td>
+    <td><div class="highlight"><pre><span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</td>
+  </tr>
+  <tr class="incremental">
+    <th>Sets</th>
+    <td>&rarr;</td>
+    <td><div class="highlight"><pre><span class="o">#</span><span class="p">{</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">}</span>
+</pre></div>
+</td>
+  </tr>
+  <tr class="incremental">
+    <th>Maps</th>
+    <td>&rarr;</td>
+    <td><div class="highlight"><pre> <span class="p">{</span><span class="nv">:name</span> <span class="s">&quot;Daniel&quot;</span><span class="o">,</span> <span class="nv">:age</span> <span class="mi">25</span><span class="p">}</span>
+</pre></div>
+</td>
+  </tr>
+</table>
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Clojure conta com estruturas de dados <i>imutáveis</i> e <i>persistentes</i>. Veremos o que isso significa mais adiante.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li><code>Vector</code>: Sequência indexada</li>
+		<li><code>List</code>: Sequência principal da linguagem</li>
+		<li><code>Set</code>: Sequência sem duplicatas</li>
+		<li><code>Map</code>: Dicionário de pares chave-valor</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide simple ">
+    <h1>
+    Keywords, Maps, Sets e Vectors  
+</h1>
+
+<h2>
+    Também são funções!  
+</h2>
+
+
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+
+</div>
+
+<div class="notes">
+
+
+	<p>Em Clojure, alguns dos tipos de dados também atuam como funções.</p>
+
+
+</div>
+</div>
+
+<div class="slide code ">
+    <h1>
+    Dados como funções  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+
+
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">a-map</span> <span class="p">{</span><span class="nv">:name</span> <span class="s">&quot;Daniel&quot;</span><span class="o">,</span> <span class="nv">:age</span> <span class="mi">25</span><span class="p">})</span>
+</pre></div>
+
+</div>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="nf">:age</span> <span class="nv">a-map</span><span class="p">)</span>
+<span class="nv">=&gt;</span> <span class="mi">25</span>
+</pre></div>
+
+</div>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="nf">a-map</span> <span class="nv">:name</span><span class="p">)</span>
+<span class="nv">=&gt;</span> <span class="s">&quot;Daniel&quot;</span>
+</pre></div>
+
+</div>
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Esse recurso é muito usado com maps, que, como podemos ver, podem ser usados como funções que aceitam um argumento correspondente à chave e retornam o valor associado.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Recurso idiomático muito usado em código Clojure</li>
+		<li><code>Map</code> aceita chave como argumento e retorna seu valor</li>
+		<li><code>Keyword</code> aceita o <code>Map</code> como argumento e retorna o valor associado a si</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide simple ">
+    <h1>
+    Lisp + Java  
+</h1>
+
+<h2>
+    O melhor dos dois mundos.  
+</h2>
+
+
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Clojure é uma linguagem de programação dinâmica que roda na <span class="caps">JVM</span>, e foi projetada para ser uma linguagem de propósito geral, combinando a facilidade e o estilo interativo de desenvolvimento de linguagens de script com uma infraestrutura eficiente e robusta para programação concorrente. Clojure não é interpretada; ela compila diretamente para bytecode, ainda que seja completamente dinâmica.</p>
+
+	<p>Ainda, como um dialeto de Lisp, Clojure compartilha de características poderosíssimas para quem precisa de um ambiente favorável à meta-programação.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Linguagem dinâmica para a <span class="caps">JVM</span>, de propósito geral</li>
+		<li>Combina facilidade e estilo interativo com infraestrutura robusta para concorrência</li>
+		<li>Não é interpretada, compila direto para bytecodes</li>
+		<li>Dinâmica</li>
+		<li>Clojure é um dialeto Lisp</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide code ">
+    <h1>
+    Code as data / data as code  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+
+
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">expression</span> <span class="o">&#39;</span><span class="p">(</span><span class="nv">*</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">2</span> <span class="mi">3</span><span class="p">)</span> <span class="mi">4</span><span class="p">))</span>
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">* </span><span class="p">(</span><span class="nb">+ </span><span class="mi">2</span> <span class="mi">3</span><span class="p">)</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="nf">list?</span> <span class="nv">expression</span><span class="p">)</span>
+<span class="nv">=&gt;</span> <span class="nv">true</span>
+</pre></div>
+
+</div>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="nb">count </span><span class="nv">expression</span><span class="p">)</span>
+<span class="nv">=&gt;</span> <span class="mi">3</span>
+</pre></div>
+
+</div>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="nb">eval </span><span class="nv">expression</span><span class="p">)</span>
+<span class="nv">=&gt;</span> <span class="mi">20</span>
+</pre></div>
+
+</div>
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Clojure é uma linguagem <i>homoicônica</i>, ou seja, as mesmas estruturas de dados usadas nos programas são usadas para representá-los internamente. Neste exemplo, criamos um <code>List</code> correspondente a uma expressão matemática. Para evitar que a expressão seja executada, prefixamos a mesma com um apóstrofo, fazendo com que a a estrutura de dados correspondente à expressão seja retornada.</p>
+
+	<p>Uma estrutura como essa pode ser avaliada com <code>(eval)</code>, ou manipulada usando funções simples que operam em sequências. Não são necessárias bibliotecas próprias para transformação de Árvores Sintáticas Abstratas, como acontece em linguagens como Python e Ruby.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>É <i>homoicônica</i>, ou seja, o programa e sua representação interna usam as mesmas estruturas de dados</li>
+		<li>Sem necessidade de biblioteca especial para <span class="caps">AST</span></li>
+		<li>Meta-programação no core da linguagem</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide code ">
+    <h1>
+    Interoperabilidade com Java  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+
+
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="nb">import </span><span class="o">&#39;</span><span class="p">[</span><span class="nv">java</span><span class="o">.</span><span class="nv">util</span> <span class="nv">Calendar</span><span class="p">])</span>
+<span class="nv">=&gt;</span> <span class="nv">java</span><span class="o">.</span><span class="nv">util</span><span class="o">.</span><span class="nv">Calendar</span>
+</pre></div>
+
+</div>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">cal</span> <span class="p">(</span><span class="nb">doto </span><span class="p">(</span><span class="nf">Calendar/getInstance</span><span class="p">)</span>
+           <span class="p">(</span><span class="o">.</span><span class="nv">set</span> <span class="nv">Calendar/YEAR</span> <span class="mi">1985</span><span class="p">)</span>
+           <span class="p">(</span><span class="o">.</span><span class="nv">set</span> <span class="nv">Calendar/MONTH</span> <span class="nv">Calendar/MAY</span><span class="p">)</span>
+           <span class="p">(</span><span class="o">.</span><span class="nv">set</span> <span class="nv">Calendar/DAY_OF_MONTH</span> <span class="mi">1</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="o">.</span><span class="nv">getTime</span> <span class="nv">cal</span><span class="p">)</span>
+<span class="nv">=&gt;</span> <span class="o">#</span><span class="nv">&lt;Date</span> <span class="nv">Wed</span> <span class="nv">May</span> <span class="mi">01</span> <span class="mi">09</span><span class="nv">:11:42</span> <span class="nv">BRT</span> <span class="mi">1985</span><span class="nv">&gt;</span>
+</pre></div>
+
+</div>
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Clojure também é conhecida pela forma com que ela interopera com a plataforma hospedeira.</p>
+
+	<p>Neste exemplo, como Clojure não fornece um conjunto de funções específicas para trabalhar com datas, usamos as classes <code>Calendar</code> já disponíveis na biblioteca padrão de Java.</p>
+
+	<p>Vale lembrar que Clojure permite também fazer coisas mais &#8220;avançadas&#8221;, como fazer coerção de tipos (inclusive primitivos), declarar classes, implementar interfaces, usar anotações, etc. Mas isso fica como exercício. :)</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Interoperabilidade total com Java e seu ecossistema</li>
+		<li>Também suporta tipos primitivos, implementação de classes/interfaces, anotações, etc</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide simple ">
+    <h1>
+    Programação Funcional  
+</h1>
+
+<h2>
+    Você não sabe que precisa dela até usá-la.  
+</h2>
+
+
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>A filosofia por trás da linguagem é que a maior parte do código deve ser funcional, resultando em código mais simples, robusto, fácil de entender e testar.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>A filosofia é que a maior parte do código deve ser funcional
+	<ul>
+		<li>Código simples, robusto, fácil de entender e testar</li>
+	</ul></li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide simple ">
+    <h1>
+    Os 3 Mandamentos da Programação Funcional  
+</h1>
+
+<h2>
+    Todos de pé, por favor.  
+</h2>
+
+
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Linguagens imperativas, grupo que compreende as linguagens procedurais e orientadas a objetos, são bem diferentes das linguagens funcionais. Por isso, o estranhamento inicial é normal por parte de quem não está acostumado.</p>
+
+	<p>A seguir, veremos algumas das características mais marcantes das linguagens funcionais, e de Clojure em especial.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Linguagens funcionais e imperativas
+	<ul>
+		<li>Exige diferentes habilidades para solucionar de problemas</li>
+		<li>Estranhamento inicial é normal</li>
+	</ul></li>
+		<li>As 3 principais características de linguagens funcionais</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide simple ">
+    <h1>
+    1&ordm; Mandamento  
+</h1>
+
+<h2>
+    <i>&#8220;Não mutarás.&#8221;</i>  
+</h2>
+
+
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Assim como a mutabilidade é quase que uma constante em linguagens imperativas, a imutabilidade é quase que uma constante em linguagens funcionais.</p>
+
+	<p>Veremos o quanto esse detalhe faz diferença quando entrarmos no assunto &#8220;concorrência&#8221;.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li><i>&#8220;Não mutarás&#8221;</i></li>
+		<li>Mutabilidade = Linguagens Imperativas</li>
+		<li>Imutabilidade = Linguagens Funcionais</li>
+		<li>Muito importante quando falarmos sobre concorrência</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide code ">
+    <h1>
+    Imutabilidade e Persistência (1)  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+	<p style="text-align:center;"><img src="media/img/persistent_1.png" class="scale" alt="Estruturas de dados persistentes" width="450" height="117"/> <br/></p>
+
+
+
+
+<div class="snippet current">
+<div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">numbers</span> <span class="p">(</span><span class="nb">range </span><span class="mi">5</span><span class="p">))</span>
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Ilustração: Daniel Martins</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<p>Todas as estruturas de dados fornecidas por Clojure são <i>imutáveis</i> e <i>persistentes</i>.</p>
+
+
+</div>
+</div>
+
+<div class="slide code ">
+    <h1>
+    Imutabilidade e Persistência (2)  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+	<p style="text-align:center;"><img src="media/img/persistent_2.png" class="scale" alt="Estruturas de dados persistentes" width="450" height="117"/> <br/></p>
+
+
+
+
+<div class="snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">numbers</span> <span class="p">(</span><span class="nb">range </span><span class="mi">5</span><span class="p">))</span>
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<div class="current snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">numbers-2</span> <span class="p">(</span><span class="nb">rest </span><span class="nv">numbers</span><span class="p">))</span>
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Quando usamos funções como <code>(rest)</code>, novas sequências são retornadas, preservando as versões anteriores; logo são <i>imutáveis</i>. Além disso, não são feitas cópias completas dos objetos; novos objetos e objetos antigos compartilham estrutura. Por isso dizemos que tais estruturas são também <i>persistentes</i>, que nesse caso nada tem a ver com bancos de dados.</p>
+
+	<p>Organizar os dados desta forma permite que as garantias de performance sejam em grande parte mantidas.</p>
+
+	<p>Ilustração: Daniel Martins</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Valores imutáveis
+	<ul>
+		<li>Manipulações em valores retornam novos valores</li>
+		<li>Podem ser compartilhados entre várias threads</li>
+	</ul></li>
+		<li>Valores persistentes
+	<ul>
+		<li>Versões novas e antigas compartilham estrutura</li>
+		<li>Garantias de performance mantidas (em grande parte)</li>
+	</ul></li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide simple ">
+    <h1>
+    2&ordm; Mandamento  
+</h1>
+
+<h2>
+    <i>&#8220;Não tratarás funções como cidadãos de segunda classe.&#8221;</i>  
+</h2>
+
+
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Em linguagens funcionais, funções são como um valor qualquer. Isso significa que uma função pode operar e retornar tanto valores simples quanto sobre outras funções.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li><i>&#8220;Não tratarás funções como cidadãos de segunda classe&#8221;</i></li>
+		<li>Funções operam sobre valores e outras funções</li>
+		<li>Funções retornam valores ou funções</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide code ">
+    <h1>
+    Funções, funções, funções&#8230;  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+
+
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="k">defn </span><span class="nv">divisible?</span> <span class="p">[</span><span class="nv">n</span> <span class="nv">d</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">zero? </span><span class="p">(</span><span class="nb">rem </span><span class="nv">n</span> <span class="nv">d</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="k">defn </span><span class="nv">is-even?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">divisible?</span> <span class="nv">n</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="nb">filter </span><span class="nv">is-even?</span> <span class="p">(</span><span class="nb">range </span><span class="mi">10</span><span class="p">))</span>
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="mi">0</span> <span class="mi">2</span> <span class="mi">4</span> <span class="mi">6</span> <span class="mi">8</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="nb">filter </span><span class="p">(</span><span class="nb">complement </span><span class="nv">is-even?</span><span class="p">)</span> <span class="p">(</span><span class="nb">range </span><span class="mi">10</span><span class="p">))</span>
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="mi">1</span> <span class="mi">3</span> <span class="mi">5</span> <span class="mi">7</span> <span class="mi">9</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Funções podem receber outras funções como argumento e retornarem outras funções. Por exemplo podemos filtrar os números pares em uma sequência passando a função <code>(is-even?)</code> a <code>(filter)</code>. Ainda, podemos criar facilmente uma função inversa a <code>(is-even?)</code> com <code>(complement)</code>.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Função <code>(is-even?)</code> usa <code>(divisible?)</code>, nada anormal até aqui</li>
+		<li>Função <code>(is-even?)</code> passada a <code>(filter)</code> para filtrar os números pares</li>
+		<li>Função <code>(complement)</code> retorna nova função com retorno booleano invertido</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide simple ">
+    <h1>
+    3&ordm; Mandamento  
+</h1>
+
+<h2>
+    <i>&#8220;Verás na preguiça uma virtude.&#8221;</i>  
+</h2>
+
+
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p><i>Lazy evaluation</i> é uma técnica muito usada em linguagens de programação funcional, e consiste em adiar uma computação até que seu resultado seja requisitado.</p>
+
+	<p>Além de evitar que tempo de <span class="caps">CPU</span> seja gasto com computações que poderão não ser utilizadas, esta técnica também permite, por exemplo, a criação de sequências infinitas.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li><i>&#8220;Verás na preguiça uma virtude&#8221;</i></li>
+		<li><i>Lazy evaluation</i>
+	<ul>
+		<li>Computar somente o necessário, quando necessário</li>
+		<li>Sem perda de tempo com computações desnecessárias</li>
+		<li>Sequências infinitas</li>
+	</ul></li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide code ">
+    <h1>
+    Estruturas de dados &#8220;lazy&#8221;  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+
+
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="k">defn </span><span class="nv">echo</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">println </span><span class="nv">n</span><span class="p">)</span> <span class="nv">n</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">my-numbers</span>
+  <span class="p">(</span><span class="nb">map </span><span class="nv">echo</span> <span class="p">(</span><span class="nb">range </span><span class="mi">3</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="nb">doall </span><span class="nv">my-numbers</span><span class="p">)</span>
+<span class="mi">0</span>
+<span class="mi">1</span>
+<span class="mi">2</span>
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="nb">doall </span><span class="nv">my-numbers</span><span class="p">)</span>
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Em Clojure, diversas funções retornam estruturas de dados <i>lazy</i>, isto é, estruturas cujos elementos só serão computados (e cacheados) quando &#8212; e se &#8212; estes forem requisitados.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Várias funções retornam sequências lazy (ex: <code>(filter)</code>)</li>
+		<li>Valores computados uma vez e cacheados</li>
+		<li><code>(doall)</code> força a avaliação dos elementos de uma sequência</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide simple ">
+    <h1>
+    Project Euler #1  
+</h1>
+
+<h2>
+    <i>&#8220;Encontre a soma de todos os múltiplos de 3 ou 5 menores que 1000.&#8221;</i>
+ 
+</h2>
+
+
+
+	<p style="text-align:center;"><a href="http://projecteuler.net/index.php?section=problems&id=1">http://projecteuler.net/index.php?section=problems&amp;id=1</a></p>
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+
+</div>
+
+<div class="notes">
+
+
+	<p>Vamos mostrar todos esses conceitos na prática.</p>
+
+
+</div>
+</div>
+
+<div class="slide code ">
+    <h1>
+    Project Euler #1 &#8211; Solução  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+
+
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="k">defn </span><span class="nv">divisible?</span> <span class="p">[</span><span class="nv">n</span> <span class="nv">coll</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">some </span><span class="o">#</span><span class="p">(</span><span class="nv">zero?</span> <span class="p">(</span><span class="nb">rem </span><span class="nv">n</span> <span class="nv">%</span><span class="p">))</span> <span class="nv">coll</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="nf">divisible?</span> <span class="mi">8</span> <span class="p">[</span><span class="mi">3</span> <span class="mi">5</span><span class="p">])</span>
+<span class="nv">=&gt;</span> <span class="nv">nil</span>
+</pre></div>
+
+</div>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="nf">divisible?</span> <span class="mi">10</span> <span class="p">[</span><span class="mi">3</span> <span class="mi">5</span><span class="p">])</span>
+<span class="nv">=&gt;</span> <span class="nv">true</span>
+</pre></div>
+
+</div>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="nb">reduce </span><span class="nv">+</span>
+  <span class="p">(</span><span class="nb">filter </span><span class="o">#</span><span class="p">(</span><span class="nv">divisible?</span> <span class="nv">%</span> <span class="p">[</span><span class="mi">3</span> <span class="mi">5</span><span class="p">])</span> <span class="p">(</span><span class="nb">range </span><span class="mi">1000</span><span class="p">)))</span>
+<span class="nv">=&gt;</span> <span class="mi">233168</span>
+</pre></div>
+
+</div>
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Primeiro, definimos a função <code>(divisible?)</code>, que serve para dizer se <code>n</code> é divisível por qualquer número em <code>coll</code>. A sintaxe <code>#(...)</code> serve para definir funções anônimas, e <code>%</code> se refere ao único parâmetro recebido por essa função.</p>
+
+	<p>Depois, fazemos alguns testes para ver se a função funciona mesmo e, por último, a usamos para resolver o problema proposto em três passos: 1) criamos a lista com todos os números possíveis; 2) filtramos os números desejados; e 3) calculamos a soma.</p>
+
+	<p>Esse simples exemplo mostra tudo: ausência de estado mutável, funções de primeira classe e sequências <i>lazy</i> (com <code>(range)</code> e <code>(filter)</code>).</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Decompor o problema em partes menores
+	<ul>
+		<li>Solução em três passos</li>
+	</ul></li>
+		<li>Imutabilidade, funções de 1o nível, lazy evaluation</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide simple ">
+    <h1>
+    O mundo dá voltas  
+</h1>
+
+<h2>
+    Nem tudo é sempre do mesmo.   
+</h2>
+
+
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Muito falamos das vantages da programação funcional, com suas funções puras e estruturas de dados imutáveis. Mas e quanto às desvantagens?</p>
+
+	<p>A principal delas é que o mundo onde vivemos não é tão previsível quanto uma simples equação matemática; aplicações não triviais tem comportamento perceptível ao longo do tempo, e isso vai de encontro alguns princípios da programação funcional.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Programação Funcional também tem suas desvantagens
+	<ul>
+		<li>Programas não triviais não são caixas-pretas</li>
+		<li>Mudanças ocorrem o tempo todo e influenciam seu funcionamento</li>
+		<li>Inerentemente incompatível com alguns princípios da programação funcional</li>
+	</ul></li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide simple ">
+    <h1>
+    Mutablidade e Concorrência  
+</h1>
+
+<h2>
+    Uma mistura pior que Créu e Rebolation.  
+</h2>
+
+
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Na verdade, a mutabilidade por si só não é o diabo. O problema é quando abusamos dela, principalmente num contexto onde podemos ter várias threads acessando os mesmos objetos.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Mutabilidade é ruim?
+	<ul>
+		<li>É ruim quando não existe controle</li>
+		<li>Misture threads = Dança do Créu</li>
+	</ul></li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide simple ">
+    <h1>
+    1&ordm; Exemplo  
+</h1>
+
+<h2>
+    Gerador de números sequenciais.  
+</h2>
+
+
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Vamos ver, a partir de agora, alguns exemplos de programas concorrentes, e de como a coisa pode ficar feia se não tomarmos certos cuidados.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+
+</div>
+</div>
+
+<div class="slide code ">
+    <h1>
+    Gerador de números únicos  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+
+
+
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">NumberGenerator</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">long</span> <span class="n">current</span> <span class="o">=</span> <span class="mi">0L</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">long</span> <span class="nf">getNext</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">++</span><span class="k">this</span><span class="o">.</span><span class="na">current</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Temos aqui uma classe que gera números sequenciais únicos. Alguém consegue ver algo de errado nesse código?</p>
+
+	<p>O método <code>getNext()</code> tem apenas uma linha de código e passa a falsa impressão de ser atômico e threadsafe&#8230;</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Método <code>getNext()</code> não sincronizado</li>
+		<li>Mas ele só tem uma linha, que problema isso pode dar?</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide image ">
+    <h1>
+    Pegadinha do Mallandro!  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+	<p style="text-align:center;"><img src="media/img/mallandro.jpg" class="scale" alt="Sérgio Mallandro" width="365" height="420"/></p>
+
+	<p style="text-align:center;"><i>&#8220;Rááááááááááááááááááááááááááá!!&#8221;</i></p>
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Foto: Sérgio Mallandro (Desconhecido)</p>
+
+
+</div>
+
+<div class="notes">
+
+
+
+</div>
+</div>
+
+<div class="slide code ">
+    <h1>
+    Race condition  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+
+
+
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">long</span> <span class="nf">getNext</span><span class="o">();</span>
+  <span class="nl">Code:</span>
+   <span class="n">Stack</span><span class="o">=</span><span class="mi">5</span><span class="o">,</span> <span class="n">Locals</span><span class="o">=</span><span class="mi">1</span><span class="o">,</span> <span class="n">Args_size</span><span class="o">=</span><span class="mi">1</span>
+   <span class="mi">0</span><span class="o">:</span>	<span class="n">aload_0</span>
+   <span class="mi">1</span><span class="o">:</span>	<span class="n">dup</span>
+   <span class="mi">2</span><span class="o">:</span>	<span class="n">getfield</span>	<span class="err">#</span><span class="mi">2</span><span class="o">;</span> <span class="c1">//Field current:J</span>
+   <span class="mi">5</span><span class="o">:</span>	<span class="n">lconst_1</span>
+   <span class="mi">6</span><span class="o">:</span>	<span class="n">ladd</span>
+   <span class="mi">7</span><span class="o">:</span>	<span class="n">dup2_x1</span>
+   <span class="mi">8</span><span class="o">:</span>	<span class="n">putfield</span>	<span class="err">#</span><span class="mi">2</span><span class="o">;</span> <span class="c1">//Field current:J</span>
+   <span class="mi">11</span><span class="o">:</span>	<span class="n">lreturn</span>
+  <span class="nl">LineNumberTable:</span> 
+   <span class="n">line</span> <span class="nl">X:</span> <span class="mi">0</span>
+</pre></div>
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>...mas só parece ser.</p>
+
+	<p>Quando a classe é compilada para bytecodes, o conteúdo do método <code>getNext()</code> é decomposto em várias outras instruções; entre uma instrução e outra, o escalonador pode permitir que outra thread rode concorrentemente, fazendo com que o método retorne o mesmo número várias vezes.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Mesmo instruções simples são compostas de várias instruções de &#8220;baixo nível&#8221;</li>
+		<li>Em qualquer uma, a thread atual pode parar e dar lugar a outra</li>
+		<li><i>Race condition</i></li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide simple ">
+    <h1>
+    Locks  
+</h1>
+
+<h2>
+    Sempre proteja acesso a estado mutável!  
+</h2>
+
+
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>A solução é sempre usar locks para proteger o acesso a estado mutável.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<p>Uma forma de resolver o problema é sincronizar o método <code>getNext()</code>.</p>
+
+
+</div>
+</div>
+
+<div class="slide code ">
+    <h1>
+    Sincronizando acesso a recurso mutável  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+
+
+
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">NumberGenerator</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">long</span> <span class="n">current</span> <span class="o">=</span> <span class="mi">0L</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">long</span> <span class="nf">getNext</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">++</span><span class="k">this</span><span class="o">.</span><span class="na">current</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Isso evita que várias threads possam rodar o mesmo método no mesmo objeto ao mesmo tempo.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+
+</div>
+</div>
+
+<div class="slide simple ">
+    <h1>
+    Identidade &ne; Valor &ne; Estado  
+</h1>
+
+<h2>
+    <i>&#8220;The ass has nothing to do with the pants.&#8221;</i>  
+</h2>
+
+
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Conceitos que são misturados em linguagens imperativas são separados em Clojure.</p>
+
+	<p>Em linguagens de programação imperativas, referências apontam diretamente para pedaços de memória onde os valores <strong>mutáveis</strong> se encontram. Isso significa que tudo pode ser modificado por qualquer um a qualquer momento. Não podemos sequer saber se o <i>estado</i> atual de um objeto é válido ou se é um valor em transição!</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Clojure separa conceitos que são misturados em outras linguagens</li>
+		<li>Em linguagens imperativas:
+	<ul>
+		<li>Referências apontam para endereços de memória</li>
+		<li>Tudo pode mudar um valor, a qualquer momento</li>
+		<li>Como saber se o valor atual é correto ou é um valor em transição?</li>
+	</ul></li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide simple ">
+    <h1>
+    Atoms, Refs, Agents  
+</h1>
+
+<h2>
+    Concorrência para todos os gostos.  
+</h2>
+
+
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Em Clojure, essa separação é feita através de uma entidade chamada <i>Reference</i>, que nada mais é que uma camada extra de indireção para um valor imutável. A grande vantagem das References é que elas devem ser modificadas de forma controlada.</p>
+
+	<p>As References se dividem em quatro tipos, sendo que, à partir de agora, veremos os três mais importantes.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Clojure separa esses conceitos com <i>References</i>
+	<ul>
+		<li>Camada de indireção para valores imutáveis</li>
+		<li>Mudar uma Reference é fazê-la apontar para outro valor imutável</li>
+		<li>Mutabilidade sem suas desvantagens</li>
+	</ul></li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide simple ">
+    <h1>
+    Atoms  
+</h1>
+
+<h2>
+    Para atualizações síncronas e não-coordenadas.  
+</h2>
+
+
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>O primeiro tipo de Reference são os <i>Atoms</i>, cuja função é permitir alterações síncronas e independentes (não coordenadas), e são perfeitas para a criação do nosso gerador de números.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li><i>Atom</i>: o tipo mais simples de Reference</li>
+		<li>Alterações síncronas e independentes, sem locks</li>
+		<li>Perfeita para o nosso primeiro problema</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide image ">
+    <h1>
+    Solução &#8211; Gerador de números únicos (1)  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+	<p style="text-align:center;"><img src="media/img/atom_1.png" class="scale" alt="Atoms" width="275" height="176"/> <br/></p>
+
+
+
+
+<div class="left snippet current">
+<div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">a-number</span> <span class="mi">10</span><span class="p">)</span>
+<span class="p">(</span><span class="k">def </span><span class="nv">counter</span> <span class="p">(</span><span class="nf">atom</span> <span class="nv">a-number</span><span class="p">))</span>
+
+<span class="nv">@counter</span> <span class="c1">;; (deref counter)</span>
+<span class="nv">=&gt;</span> <span class="mi">10</span>
+</pre></div>
+
+</div>
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Perceba que o Atom funciona como uma camada de indireção para o valor (imutável, vale ressaltar) a ser controlado. Isso é assim também com as outras References que veremos mais adiante.</p>
+
+	<p>Ilustração: Daniel Martins</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Reference é uma simples camada de indireção para um valor imutável</li>
+		<li>Leitura do valor com <code></code>@ ou <code>(deref)</code></li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide image ">
+    <h1>
+    Solução &#8211; Gerador de números únicos (2)  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+	<p style="text-align:center;"><img src="media/img/atom_2.png" class="scale" alt="Atoms" width="275" height="176"/> <br/></p>
+
+
+
+
+<div class="snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">a-number</span> <span class="mi">10</span><span class="p">)</span>
+<span class="p">(</span><span class="k">def </span><span class="nv">counter</span> <span class="p">(</span><span class="nf">atom</span> <span class="nv">a-number</span><span class="p">))</span>
+
+<span class="nv">@counter</span> <span class="c1">;; (deref counter)</span>
+<span class="nv">=&gt;</span> <span class="mi">10</span>
+</pre></div>
+
+</div>
+
+<div class="current snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="nf">swap!</span> <span class="nv">counter</span> <span class="nv">inc</span><span class="p">)</span>
+<span class="nv">=&gt;</span> <span class="mi">11</span>
+</pre></div>
+
+</div>
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Para trocar o valor de uma Reference, basta fazê-la apontar para outro valor imutável. Por isso, mesmo mudanças complexas ocorrem de forma &#8220;atômica&#8221;, sem que ninguém leia um valor intermediário.</p>
+
+	<p>No caso dos Atoms, é a função <code>(swap!)</code> que faz a mágica. Internamente, o que a função <code>(swap!)</code> faz é ler o valor atual do Atom, aplicar a função a ele, e o substituir pelo valor retornado. Como outra thread pode ter alterado o Atom nesse meio tempo, esse processo se repete até que não haja alterações conflitantes. Portanto, as alterações são livres de race conditions.</p>
+
+	<p>Para quem está familiarizado com a <span class="caps">API</span> <code>java.util.concurrent.*</code>, essa função usa internamente o método <code>compareAndSet()</code>, da classe <code>AtomicReference</code>.</p>
+
+	<p>Ilustração: Daniel Martins</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li><code>(swap!)</code> troca o valor de um Atom de forma atômica</li>
+		<li>Não bloqueia outras threads</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide simple ">
+    <h1>
+    2&ordm; Exemplo  
+</h1>
+
+<h2>
+    Transferência bancária.  
+</h2>
+
+
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Muito fácil até aqui, não? Não poderia ser diferente, afinal estamos lidamos com apenas um recurso compartilhado.</p>
+
+	<p>Para mostrar o quão feia a coisa pode ficar, veremos um exemplo um pouquinho mais elaborado.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Sincronizar <i>apenas um</i> recurso é fácil</li>
+		<li>Próximo exemplo: transferência bancária</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide code ">
+    <h1>
+    Transferência bancária  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+
+
+
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Account</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">double</span> <span class="n">balance</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">withdraw</span><span class="o">(</span><span class="kt">double</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">balance</span> <span class="o">-=</span> <span class="n">amount</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">deposit</span><span class="o">(</span><span class="kt">double</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">balance</span> <span class="o">+=</span> <span class="n">amount</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">transferTo</span><span class="o">(</span><span class="n">Account</span> <span class="n">to</span><span class="o">,</span> <span class="kt">double</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">withdraw</span><span class="o">(</span><span class="n">amount</span><span class="o">);</span>
+        <span class="n">to</span><span class="o">.</span><span class="na">deposit</span><span class="o">(</span><span class="n">amount</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Temos aqui um exemplo de classe que representa uma conta bancária com as três operações básicas: saque, depósito e transferência.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Eis um exemplo de implementação</li>
+		<li>Perceberam algo errado?</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide simple ">
+    <h1>
+    Já esqueceu, é?  
+</h1>
+
+<h2>
+   
+<cite>&#9834; &#8220;Synchroniza-tion-tion&#8230;&#8221; &#9834;</cite>
+ 
+</h2>
+
+
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Para evitar o problema que vimos no exemplo anterior, lembre-se que devemos sincronizar os métodos que acessam recursos compartilhados.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Devemos sincronizar os métodos para evitar <i>race conditions</i></li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide code ">
+    <h1>
+    Transferência bancária &#8211; nova tentativa  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+
+
+
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Account</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">double</span> <span class="n">balance</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">withdraw</span><span class="o">(</span><span class="kt">double</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">balance</span> <span class="o">-=</span> <span class="n">amount</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">deposit</span><span class="o">(</span><span class="kt">double</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">balance</span> <span class="o">+=</span> <span class="n">amount</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">transferTo</span><span class="o">(</span><span class="n">Account</span> <span class="n">to</span><span class="o">,</span> <span class="kt">double</span> <span class="n">amount</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">withdraw</span><span class="o">(</span><span class="n">amount</span><span class="o">);</span>
+        <span class="n">to</span><span class="o">.</span><span class="na">deposit</span><span class="o">(</span><span class="n">amount</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Além disso, para tornar o procedimento de transferência bancária atômico, o método <code>transferTo()</code> também foi sincronizado.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Pronto, sincronizado!
+	<ul>
+		<li>Inclusive o método <code>transferTo()</code>, para tornar a operação &#8220;atômica&#8221;</li>
+	</ul></li>
+		<li>Isso basta, certo?</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide image ">
+    <h1>
+    Pegadinha do Mallandro!  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+	<p style="text-align:center;"><img src="media/img/mallandro.jpg" class="scale" alt="Sérgio Mallandro" width="365" height="420"/></p>
+
+	<p style="text-align:center;"><i>&#8220;Rááááááááááááááááááááááááááá!!&#8221;</i></p>
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Foto: Sérgio Mallandro (Desconhecido)</p>
+
+
+</div>
+
+<div class="notes">
+
+
+
+</div>
+</div>
+
+<div class="slide code ">
+    <h1>
+    Deadlock  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+
+
+
+<pre>
+<strong>"Thread-2":
+	at Account.deposit(BankingWrong2.java:89)
+	- waiting to lock &lt;0xaca831b8&gt; (a Account)</strong>
+	at Account.transferTo(BankingWrong2.java:104)
+	<strong>- locked &lt;0xaca831d0&gt; (a Account)</strong>
+	at BankingWrong2$2.run(BankingWrong2.java:20)
+	at java.lang.Thread.run(Thread.java:619)
+<strong>"Thread-1":
+	at Account.deposit(BankingWrong2.java:89)
+	- waiting to lock &lt;0xaca831d0&gt; (a Account)</strong>
+	at Account.transferTo(BankingWrong2.java:104)
+	<strong>- locked &lt;0xaca831b8&gt; (a Account)</strong>
+	at BankingWrong2$1.run(BankingWrong2.java:13)
+	at java.lang.Thread.run(Thread.java:619)
+
+<strong>Found 1 deadlock.</strong>
+</pre>
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>No método sincronizado <code>transferTo()</code> há uma chamada a <code>withdraw()</code>, no mesmo objeto, e a <code>deposit()</code>, também sincronizado, no objeto recebido via parâmetro.</p>
+
+	<p>Portanto, se <code>transferTo()</code> for chamado na conta <strong>A</strong> para a conta <strong>B</strong>, e ao mesmo tempo, <code>transferTo()</code> for chamado na conta <strong>B</strong> para a conta <strong>A</strong>, voilá: temos um deadlock!</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Deadlock!
+	<ul>
+		<li><code>a.transferTo(b, x)</code> e <code>b.transferTo(a, x)</code> rodarem ao mesmo tempo</li>
+	</ul></li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide code smallcode">
+    <h1>
+    Lock ordering  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+
+
+
+<div class="highlight"><pre><span class="n">Object</span> <span class="n">tie</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="o">();</span>
+
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">transfer</span><span class="o">(</span><span class="n">Account</span> <span class="n">from</span><span class="o">,</span> <span class="n">Account</span> <span class="n">to</span><span class="o">,</span> <span class="kt">double</span> <span class="n">amount</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="n">Account</span> <span class="n">a1</span> <span class="o">=</span> <span class="n">from</span><span class="o">,</span> <span class="n">a2</span> <span class="o">=</span> <span class="n">to</span><span class="o">;</span>
+    <span class="kt">boolean</span> <span class="n">useTie</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+
+    <span class="kt">int</span> <span class="n">hashFrom</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">identityHashCode</span><span class="o">(</span><span class="n">from</span><span class="o">);</span>
+    <span class="kt">int</span> <span class="n">hashTo</span>   <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">identityHashCode</span><span class="o">(</span><span class="n">to</span><span class="o">);</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">hashFrom</span> <span class="o">&gt;</span> <span class="n">hashTo</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">useTie</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">hashFrom</span> <span class="o">&lt;</span> <span class="n">hashTo</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">a1</span> <span class="o">=</span> <span class="n">to</span><span class="o">;</span> <span class="n">a2</span> <span class="o">=</span> <span class="n">from</span><span class="o">;</span> <span class="n">useTie</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">useTie</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">synchronized</span> <span class="o">(</span><span class="n">tie</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kd">synchronized</span> <span class="o">(</span><span class="n">a1</span><span class="o">)</span> <span class="o">{</span>
+                <span class="kd">synchronized</span> <span class="o">(</span><span class="n">a2</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">from</span><span class="o">.</span><span class="na">withdraw</span><span class="o">(</span><span class="n">amount</span><span class="o">);</span> <span class="n">to</span><span class="o">.</span><span class="na">deposit</span><span class="o">(</span><span class="n">amount</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="kd">synchronized</span> <span class="o">(</span><span class="n">a1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kd">synchronized</span> <span class="o">(</span><span class="n">a2</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">from</span><span class="o">.</span><span class="na">withdraw</span><span class="o">(</span><span class="n">amount</span><span class="o">);</span> <span class="n">to</span><span class="o">.</span><span class="na">deposit</span><span class="o">(</span><span class="n">amount</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Sincronizar um único recurso, como mostramos no problema anterior, é algo muito simples de ser feito. Aumente o número de recursos para 2 (ou mais) e veja que rapidamente as coisas começam a sair do controle.</p>
+
+	<p>Aqui foi preciso usar uma técnica (gambiarra) conhecida como <strong>lock ordering</strong>, que consiste em determinar a ordem na qual os locks são obtidos afim de evitar ciclos que levem a deadlocks.</p>
+
+	<p>E o método, que tinha apenas 4 linhas de código, agora tem quase 30. Um pequeno aumento de ~650% LOC!</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Fazer isso funcionar em Java dá trabalho
+	<ul>
+		<li>Aumento de ~650% LOC!</li>
+	</ul></li>
+		<li>Solução possível usando <i>lock ordering</i>
+	<ul>
+		<li>Reservar locks sempre na mesma ordem evita deadlock</li>
+	</ul></li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide image ">
+    <h1>
+    Sai de ré  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+	<p style="text-align:center;"><img src="media/img/bottom-fuuu.jpg" class="scale" alt="FFUUUU-" width="420" height="420"/></p>
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Sem condições. Precisamos arranjar um jeito de alterar vários recursos dentro de uma <strong>unidade lógica de trabalho</strong>, e garantir que, em caso de falhas, <i>nenhuma</i> das alterações seja confirmada, ou, em caso de sucesso, que <i>todas</i> as alterações se tornem públicas de uma só vez.</p>
+
+	<p>Ilustração: Fuuu Gogh (<a href="http://www.teefury.com/archive/886/FUUU/">Fat Mouse</a>)</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Tem que haver uma solução mais simples</li>
+		<li>Unidade lógica de trabalho com garantias transacionais</li>
+		<li>Tudo deve falhar (ou suceder) ao mesmo tempo</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide simple ">
+    <h1>
+    Software Transaction Memory  
+</h1>
+
+<h2>
+    Atomicidade, Consistência, Isolamento.  
+</h2>
+
+
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Felizmente, existe algo parecido em Clojure.</p>
+
+	<p>A unidade de trabalho a que me referi é implementada por um componente chamado <strong>STM</strong>, ou <i>Software Transactional Memory</i>, que é responsável por fornecer semântica transacional semelhante a encontrada em bancos de dados relacionais.</p>
+
+	<p>As <i>Refs</i>, o segundo tipo de Reference que veremos hoje, são necessárias quando precisamos realizar alterações síncronas e coordenadas com o auxílio da <strong>STM</strong>. Esse tipo de Reference é perfeita para resolvermos esse problema de transferência bancária.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li><i>Refs</i>: O segundo tipo de Reference
+	<ul>
+		<li>Trazem essa semântica transacional aos nossos programas</li>
+		<li>Alterações síncronas e coordenadas, sem locks</li>
+	</ul></li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide code ">
+    <h1>
+    Transferência bancária &#8211; Solução  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+
+
+
+<div class="snippet incremental">
+<div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">my-account</span>   <span class="p">(</span><span class="nb">ref </span><span class="mi">100</span><span class="p">))</span>
+<span class="p">(</span><span class="k">def </span><span class="nv">your-account</span> <span class="p">(</span><span class="nb">ref </span><span class="mi">100</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<div class="snippet incremental">
+<div class="highlight"><pre><span class="p">(</span><span class="k">defn </span><span class="nv">withdraw</span> <span class="p">[</span><span class="nv">account-ref</span> <span class="nv">amount</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">alter </span><span class="nv">account-ref</span> <span class="nv">-</span> <span class="nv">amount</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<div class="snippet incremental">
+<div class="highlight"><pre><span class="p">(</span><span class="k">defn </span><span class="nv">deposit</span> <span class="p">[</span><span class="nv">account-ref</span> <span class="nv">amount</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">alter </span><span class="nv">account-ref</span> <span class="nv">+</span> <span class="nv">amount</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<div class="snippet incremental">
+<div class="highlight"><pre><span class="p">(</span><span class="nf">dosync</span>
+  <span class="p">(</span><span class="nf">withdraw</span> <span class="nv">my-account</span> <span class="mf">10.0</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">deposit</span> <span class="nv">your-account</span> <span class="mf">10.0</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<div class="snippet incremental">
+<div class="highlight"><pre><span class="p">[</span><span class="nv">@my-account</span> <span class="nv">@your-account</span><span class="p">]</span>
+<span class="nv">=&gt;</span> <span class="p">[</span><span class="mf">90.0</span> <span class="mf">110.0</span><span class="p">]</span>
+</pre></div>
+
+</div>
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Criamos neste exemplo duas <i>Refs</i>, uma para cada conta, e definimos as operações suportadas. Vejam que essas operações usam <code>(alter)</code> para alterar o valor de uma <i>Ref</i>, da mesma forma que se usa <code>(swap!)</code> para alterar o valor de um <i>Atom</i>. A única diferença é que <code>(alter)</code> deve ser chamada sempre dentro do contexto de um <code>(dosync)</code>, que é quem determina o escopo da unidade de trabalho.</p>
+
+	<p>Novamente, não foi necessário usar locks; Clojure cuida disso para nós.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li><code>(alter)</code> altera o valor de uma Ref</li>
+		<li>Deve ser sempre chamada dentro de <code>(dosync)</code>
+	<ul>
+		<li>Define o escopo da unidade de trabalho</li>
+	</ul></li>
+		<li>Sem locks, novamente</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide image ">
+    <h1>
+    Ref &#8211; Workflow  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+	<p style="text-align:center;"><img src="media/img/ref_workflow.png" class="scale" alt="Ref - workflow" width="585" height="500"/></p>
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Cada thread tem sua própria visão do mundo das <i>Refs</i> através de snapshots. Dessa forma, uma thread não consegue ver as alterações feitas por outra até que esta confirme a transação. Além disso, um bloco <code>(dosync)</code> pode ser executado mais de uma vez caso outra thread modifique uma <i>Ref</i>.</p>
+
+	<p>Em ambientes onde existem muitas threads alterando as mesmas <i>Refs</i> a todo instante, temos uma perda de performance por conta desse loop, o que é aceitável considerando que temos um código extremamente simples (livre de <i>race conditions</i> e <i>deadlocks</i>).</p>
+
+	<p>Ilustração: Daniel Martins</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Cada thread tem seu snapshot do mundo</li>
+		<li>Mudanças só se tornam públicas após o <i>commit</i></li>
+		<li><code>(dosync)</code> roda novamente quando detecta updates conflitantes
+	<ul>
+		<li>Muitas escritas + poucas Refs = maior contenção = menor performance</li>
+		<li>Custo baixo comparado às vantagens</li>
+	</ul></li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide code simple">
+    <h1>
+    Esqueceu da transação?  
+</h1>
+
+<h2>
+    Sem problemas.  
+</h2>
+
+
+
+
+
+
+<br/>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="nf">withdraw</span> <span class="nv">myAccount</span> <span class="mi">10</span><span class="p">)</span>
+<span class="nv">=&gt;</span> <span class="nv">java</span><span class="o">.</span><span class="nv">lang</span><span class="o">.</span><span class="nv">IllegalStateException:</span> <span class="nv">No</span> <span class="nv">transaction</span> <span class="nv">running</span> <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>E se eu esquecer de colocar os <code>(alter)</code> dentro de um <code>(dosync)</code>, meu programa vai falhar silenciosamente? Não! Tentar modificar referências fora de uma transação resulta em exception.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Usar <code>(alter)</code> fora de <code>(dosync)</code> resulta em exception</li>
+		<li>Sem falhas silenciosas</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide simple ">
+    <h1>
+    3&ordm; Exemplo  
+</h1>
+
+<h2>
+    Baixador de capas de discos.  
+</h2>
+
+
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Partindo para o último exemplo de hoje, que envolve a execução de tarefas assíncronas (em paralelo).</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Exemplo: cover art downloader</li>
+		<li>Execução de tarefas assíncronas</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide code ">
+    <h1>
+    <span class="caps">HTTP</span> client assíncrono  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+
+
+
+<div class="highlight"><pre><span class="k">for</span> <span class="o">(</span><span class="kd">final</span> <span class="n">PlaylistEntry</span> <span class="n">track</span> <span class="o">:</span> <span class="n">myPlaylist</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">new</span> <span class="nf">Thread</span><span class="o">(</span><span class="k">new</span> <span class="n">Runnable</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="c1">// Pesquisa a capa na internet e faz o download</span>
+                <span class="n">fetchCoverArt</span><span class="o">(</span><span class="n">track</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">// ...</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}).</span><span class="na">start</span><span class="o">();</span>
+<span class="o">}</span>
+</pre></div>
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Imaginem que temos que baixar a capa dos discos de milhares de músicas. Esta seria uma forma eficiente de resolver o problema?</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Criar threads para fazer o trabalho em paralelo
+	<ul>
+		<li>É uma boa solução?</li>
+	</ul></li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide image ">
+    <h1>
+    Existe um limite para tudo  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+	<p style="text-align:center;"><img src="media/img/overload.jpg" class="scale" alt="Sobrecarga" width="547" height="420"/></p>
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Evite fazer algo assim! A ideia é ruim pois podemos acabar criando mais threads que o necessário, sem falar que threads puras não fornecem sistemas confiáveis para tratamento de erros, cancelamento de tarefas, entre outras coisas.</p>
+
+	<p>De qualquer modo, os recursos poderiam ser melhor aproveitados se usássemos uma thread pool.</p>
+
+	<p>Foto: Phill Cotterill</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Jamais faça isso!</li>
+		<li>Muitas jobs muito longas = sobrecarrega o sistema como um todo</li>
+		<li>Muitas jobs muito curtas = muitas threads desnecessárias</li>
+		<li>Thread pool: melhor utilização dos recursos</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide simple ">
+    <h1>
+    <code>java.util.concurrent.*</code>  
+</h1>
+
+<h2>
+    Mais difícil do que parece.  
+</h2>
+
+
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Quando precisamos realizar ações assíncronas, a <span class="caps">API</span> <code>java.util.concurrent.*</code> oferece um conjunto de classes e interfaces que nos dá mais controle para resolver problemas como esse, mas ela não é para qualquer um, já que seu uso involve uma série de classes e interfaces.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>A nova <span class="caps">API</span> ajuda, mas ainda não é para qualquer um</li>
+		<li><span class="caps">API</span> extensa: Executor, ExecutorService, Future, Runnable, etc</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide simple ">
+    <h1>
+    Agents  
+</h1>
+
+<h2>
+    Complexidade na medida certa.  
+</h2>
+
+
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p><i>Agents</i> servem justamente para o caso de precisarmos fazer atualizações assíncronas e independentes. Com um conjunto reduzido de funções, podemos aproveitar os recursos existentes na <span class="caps">API</span> <code>java.util.concurrent.*</code> para tal, de uma forma simples; Clojure cuida das partes chatas, como criar e manter thread pools separados para jobs normais e jobs de I/O, entre outras coisas.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Atualizações assíncronas e indepentes</li>
+		<li>Agents usam a <span class="caps">API</span> <code>java.util.concurrent.*</code> por baixo dos panos</li>
+		<li>Gerenciamento automático de thread pool, executors, etc</li>
+		<li>Funções simples para criar Agents, enfileirar ações e tratar erros</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide code ">
+    <h1>
+    Cover art downloader &#8211; Solução  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+
+
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">some-track</span>
+  <span class="p">{</span><span class="nv">:artist</span> <span class="s">&quot;Massacration&quot;</span><span class="o">,</span> <span class="nv">:album</span> <span class="s">&quot;Good Blood Headbangers&quot;</span><span class="o">,</span> <span class="o">...</span><span class="p">})</span>
+</pre></div>
+
+</div>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="k">defn </span><span class="nv">cover-art-agent</span> <span class="p">[</span><span class="nv">track</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">track-agent</span> <span class="p">(</span><span class="nb">agent </span><span class="nv">track</span><span class="p">)]</span>
+    <span class="p">(</span><span class="nb">send-off </span><span class="nv">track-agent</span> <span class="nv">update-cover-art</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="k">defn </span><span class="nv">update-cover-art</span> <span class="p">[</span><span class="nv">track</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">assoc </span><span class="nv">track</span> <span class="nv">:cover-art</span> <span class="p">(</span><span class="nf">fetch-cover-art</span> <span class="nv">track</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">track-agents</span>
+  <span class="p">(</span><span class="nb">doall </span><span class="p">(</span><span class="nb">map </span><span class="nv">cover-art-agent</span> <span class="nv">my-playlist</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Aqui, representamos cada item da playlist como um <code>Map</code> que contém o nome da música, o artista, o nome do álbum, entre outras coisas.</p>
+
+	<p>A função <code>cover-art-agent</code> cria um Agent para uma determinada música e pede que esse Agent rode a função <code>update-cover-art</code> em paralelo. Esta função, por sua vez, faz o download da capa do disco com <code>fetch-cover-art</code> e atualiza o <code>Map</code> da música com essa informação.</p>
+
+	<p>Por último, a função <code>(cover-art-agent)</code> é chamada para cada música da playlist. Como a função <code>(map)</code> retorna uma sequência lazy, tomamos o cuidado de passar o resultado para <code>(doall)</code>, forçando a criação dos Agents.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Música da playlist representada por um <code>Map</code></li>
+		<li>Função <code>cover-art-agent</code> cria um Agent para uma música e pede que a função <code>update-cover-art</code> seja executada em paralelo para ela</li>
+		<li>Um tempo depois, a capa é baixada e o  <code>Map</code> é atualizado com a nova informação</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide simple ">
+    <h1>
+    Problemas acontecem  
+</h1>
+
+<h2>
+    Toda hora é hora.  
+</h2>
+
+
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Usar Agents em Clojure parece ser muito simples, mas e em caso de erros? O que acontece se uma ou mais ações enviadas a Agents falhem por quaisquer motivos?</p>
+
+	<p>Quando trabalhamos com tarefas assíncronas, precisamos sempre que possível tratar possíveis erros.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Código simples, mas não mostra como lidar com possíveis erros
+	<ul>
+		<li>Tratamento de erros é essencial em tarefas assíncronas</li>
+	</ul></li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide code ">
+    <h1>
+    Cover art downloader &#8211; Tratamento de erros  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+
+
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="nb">send-off </span><span class="nv">failed-agent</span> <span class="nv">update-cover-art</span><span class="p">)</span>
+<span class="nv">=&gt;</span> <span class="nv">java</span><span class="o">.</span><span class="nv">lang</span><span class="o">.</span><span class="nv">RuntimeException:</span> <span class="nv">Agent</span> <span class="nv">is</span> <span class="nv">failed,</span> <span class="nv">needs</span> <span class="nv">restart</span>
+</pre></div>
+
+</div>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="nf">agent-error</span> <span class="nv">failed-agent</span><span class="p">)</span>
+<span class="nv">=&gt;</span> <span class="o">#</span><span class="nv">&lt;ConnectException</span> <span class="nv">java</span><span class="o">.</span><span class="nv">net</span><span class="o">.</span><span class="nv">ConnectException:</span> <span class="nv">connection</span> <span class="nv">refused&gt;</span>
+</pre></div>
+
+</div>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="nf">restart-agent</span> <span class="nv">failed-agent</span> <span class="nv">track</span><span class="p">)</span>
+<span class="nv">=&gt;</span> <span class="p">{</span><span class="nv">:artist</span> <span class="s">&quot;Massacration&quot;</span><span class="o">,</span> <span class="nv">:album</span> <span class="s">&quot;Good Blood Headbangers&quot;</span> <span class="o">...</span><span class="p">}</span>
+</pre></div>
+
+</div>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="p">(</span><span class="nb">send-off </span><span class="nv">failed-agent</span> <span class="nv">update-cover-art</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<div class="incremental snippet">
+<div class="highlight"><pre><span class="c1">;; Algum tempo depois...</span>
+<span class="nv">@failed-agent</span>
+<span class="nv">=&gt;</span> <span class="p">{</span><span class="nv">:cover-art</span> <span class="o">#</span><span class="nv">&lt;File</span><span class="o">...</span><span class="nv">&gt;,</span> <span class="nv">:artist</span> <span class="s">&quot;Massacration&quot;</span> <span class="o">...</span><span class="p">}</span>
+</pre></div>
+
+</div>
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Por exemplo, imagine que uma ação enviada ao Agent <code>failed-agent</code> tenha lançado uma exception. Neste caso, enviar novas ações a tal Agent resulta em exception até que o mesmo seja reiniciado com <code>(restart-agent)</code>.</p>
+
+	<p>Com a função <code>(agent-error)</code> podemos saber qual foi a exception lançada e tomar precauções para que isso não ocorra novamente.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Agent não aceita outras ações após uma delas resultar em erro
+	<ul>
+		<li>A função <code>(agent-error)</code> retorna qual foi a exception lançada</li>
+	</ul></li>
+		<li>Agent volta a aceitar ações após <code>(restart-agent)</code></li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide simple ">
+    <h1>
+    Power Refs  
+</h1>
+
+<h2>
+    Validators, Error Handlers, Watchers&#8230;  
+</h2>
+
+
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>As References são capazes de muito mais do que o mostrado aqui. Por exemplo, qualquer tipo de Reference pode especificar uma função validadora, e sempre que o seu valor for alterado, essa função servirá para permitir ou negar a alteração com base nas regras que você especificar.</p>
+
+	<p>Os Agents também podem especificar uma função a ser chamada sempre que uma ação enviada a eles lance uma exception. Assim, podemos tratar o erro e reiniciar um agent num único passo.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>As References são capazes de muito mais
+	<ul>
+		<li>Vimos apenas o básico do básico</li>
+	</ul></li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide  ">
+    <h1>
+    Isso foi só o começo    
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+	<ul>
+		<li>destructuring</li>
+		<li>namespaces</li>
+		<li>multimethods</li>
+		<li>macros</li>
+		<li>protocols</li>
+		<li>etc&#8230;</li>
+	</ul>
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Tratamos aqui hoje apenas uma parte do que a linguagem oferece. O tempo é curto&#8230;</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Clojure tem muito mais a oferecer</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide image ">
+    <h1>
+    Referência &#8211; Clojure.org  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+	<p style="text-align:center;"><img src="media/img/clojure.png" class="scale" alt="Website oficial da linguagem" width="700" height="425"/></p>
+
+	<p style="text-align:center;"><a href="http://clojure.org">http://clojure.org</a></p>
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>O próprio site oficial de Clojure possui links que guiam para wikis, fóruns, vídeo-aulas e <span class="caps">IRC</span>.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Site oficial da linguagem</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide image ">
+    <h1>
+    Recomendação &#8211; Clojure: Functional Programming for the <span class="caps">JVM</span>  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+	<p style="text-align:center;"><img src="media/img/oci.jpg" class="scale" alt="Clojure - Funcional Programming for the JVM" width="700" height="425"/></p>
+
+	<p style="text-align:center;"><a href="http://java.ociweb.com/mark/clojure/article.html">http://java.ociweb.com/mark/clojure/article.html</a></p>
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Excelente artigo disponível na web, dá uma introdução aos vários recursos da linguagem.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Artigo grátis, boa introdução</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide image ">
+    <h1>
+    Recomendação &#8211; Programming Clojure  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+	<p style="text-align:center;"><img src="media/img/shcloj.jpg" class="scale" alt="Programming Clojure" width="374" height="448"/></p>
+
+	<p style="text-align:center;"><a href="http://www.pragprog.com/titles/shcloj/programming-clojure">http://www.pragprog.com/titles/shcloj/programming-clojure</a></p>
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Excelente livro para quem nunca viu Clojure e tem pouca experiência com programação funcional.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Bom para quem é novo tanto em Clojure quanto em programação funcional</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide image ">
+    <h1>
+    Recomendação &#8211; The Joy of Clojure  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+	<p style="text-align:center;"><img src="media/img/tjoc.jpg" class="scale" alt="The Joy of Clojure" width="346" height="448"/></p>
+
+	<p style="text-align:center;"><a href="http://joyofclojure.com/buy">http://joyofclojure.com/buy</a></p>
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>Recomendo este livro para quem já escreveu pelo menos algumas linhas de código em Clojure.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Livro mais completo e atualizado</li>
+	</ul>
+
+
+</div>
+</div>
+
+<div class="slide simple ">
+    <h1>
+    Obrigado!  
+</h1>
+
+<h2>
+    
+</h2>
+
+
+
+<br/>
+
+	<h3>Daniel Martins</h3>
+
+	<h4>Destaquenet Soluções em Tecnologia</h4>
+
+	<p><a href="http://twitter.com/danielfmt">@danielfmt</a> &bull; <a href="mailto:daniel@destaquenet.com">daniel@destaquenet.com</a> &bull <a href="http://destaquenet.com">destaquenet.com</a></p>
+
+	<p style="text-align:center;"><img src="media/img/cc.png" class="scale" alt="Licença Creative Commons" width="88" height="31"/></p>
+
+
+
+
+
+<div class="handout">
+<hr/>
+
+
+	<p>É isso aí, espero que tenham gostado! Se tiverem qualquer dúvida, estamos aí.</p>
+
+
+</div>
+
+<div class="notes">
+
+
+	<ul>
+		<li>Perguntas?</li>
+	</ul>
+
+
+</div>
+</div>
+
+
+</div>
+
+</body>
+</html>
