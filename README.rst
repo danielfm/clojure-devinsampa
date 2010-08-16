@@ -3,8 +3,8 @@ Programação Funcional e Concorrente para JVM com Clojure
 
 Palestra apresentada no Dev in Sampa 2010.
 
-Os slides da apresentação podem ser baixados a partir da `página de downloads`_
-do projeto.
+Os slides da apresentação podem ser `vistos aqui`_, ou baixados a partir da
+`página de downloads`_ do projeto.
 
 "Compilando" a apresentação
 ---------------------------
@@ -49,6 +49,7 @@ comando ``bin/clojure.sh <arquivo.clj>`` para rodar um exemplo específico.
 Para iniciar o REPL, ambiente de execução interativo da linguagem, basta rodar
 o comando ``bin/clojure.sh`` sem argumentos.
 
+.. _vistos aqui: http://danielfm.github.com/clojure-devinsampa/
 .. _página de downloads: http://github.com/danielfm/clojure-devinsampa/downloads
 .. _Python: http://python.org
 .. _PIP: http://pip.openplans.org
